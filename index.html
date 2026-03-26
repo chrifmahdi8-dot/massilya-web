@@ -95,22 +95,21 @@
         .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
 
         /* ========================================= */
-        /* 🚀 الإضافة الجديدة: الزر العائم الاحترافي */
+        /* الزر العائم الاحترافي + كلاس الإخفاء */
         /* ========================================= */
         .floating-chat-btn {
-            position: fixed; bottom: 25px; left: 25px; /* يظهر في أسفل اليسار */
+            position: fixed; bottom: 25px; left: 25px;
             background-color: var(--primary); color: white;
             width: 60px; height: 60px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
             cursor: pointer; z-index: 9999;
-            transition: transform 0.3s;
-            animation: pulse-animation 2s infinite; /* تأثير النبض الجذاب */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s, background-color 0.3s;
+            animation: pulse-animation 2s infinite;
         }
-        .floating-chat-btn:hover { transform: scale(1.1); background-color: var(--dark-green); }
+        .floating-chat-btn:hover { background-color: var(--dark-green); }
         .floating-chat-btn svg { width: 30px; height: 30px; fill: white; }
         
-        /* التلميح الذي يخرج من الزر */
         .floating-chat-btn .tooltip {
             position: absolute; left: 75px; 
             background-color: white; color: var(--dark-green);
@@ -119,6 +118,14 @@
             opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateX(-10px);
         }
         .floating-chat-btn:hover .tooltip { opacity: 1; transform: translateX(0); }
+
+        /* الكلاس السحري لإخفاء الزر نهائياً */
+        .floating-chat-btn.hidden {
+            opacity: 0;
+            transform: scale(0) !important;
+            pointer-events: none;
+            animation: none;
+        }
 
         @keyframes pulse-animation {
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
@@ -139,7 +146,6 @@
         <p class="section-subtitle">👈 اسحب لليمين واليسار لتصفح المنتجات</p>
         
         <div class="slider-container">
-            <!-- المنتجات -->
             <div class="product-card"><img src="chicken.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème 30% Urée</h4><p>علاج فعال لجلد الدجاجة والخشونة</p></div>
             <div class="product-card"><img src="produit.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Lotion Anti-Chute</h4><p>محلول مكثف لعلاج تساقط الشعر</p></div>
             <div class="product-card"><img src="2acide.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Gel Exfoliant 2% BHA</h4><p>مقشر قوي لحب الشباب</p></div>
@@ -150,7 +156,6 @@
             <div class="product-card"><img src="jel.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème de Douche</h4><p>كريم استحمام للترطيب</p></div>
         </div>
 
-        <!-- تم إضافة ID هنا لكي يعرف الزر أين يتجه -->
         <h2 id="chat-section" class="section-title" style="margin-top: 20px;">💬 استشارة العناية بالبشرة</h2>
         <div class="chat-box">
             <div class="chat-messages" id="chat-messages">
@@ -168,9 +173,8 @@
         </div>
     </div>
 
-    <!-- 🚀 الإضافة الجديدة: عنصر الزر العائم في HTML -->
-    <div class="floating-chat-btn" onclick="scrollToChat()">
-        <!-- أيقونة المحادثة -->
+    <!-- الزر العائم -->
+    <div class="floating-chat-btn" id="floating-btn" onclick="scrollToChat()">
         <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
         <div class="tooltip">تحدث مع الخبير الآن</div>
     </div>
@@ -179,6 +183,8 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const typingIndicator = document.getElementById('typing');
+        const floatingBtn = document.getElementById('floating-btn');
+        const chatSection = document.getElementById('chat-section');
 
         function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
 
@@ -205,16 +211,23 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // 🚀 دالة التزحلق الناعم عند الضغط على الزر العائم
+        // 1. التزحلق الناعم والإخفاء عند الضغط
         function scrollToChat() {
-            const chatSection = document.getElementById('chat-section');
-            // النزول بنعومة
             chatSection.scrollIntoView({ behavior: 'smooth' });
-            // وضع مؤشر الماوس/لوحة المفاتيح داخل خانة الكتابة تلقائياً بعد نصف ثانية
+            floatingBtn.classList.add('hidden'); // إخفاء الزر فوراً
             setTimeout(() => {
-                document.getElementById('user-input').focus();
+                userInput.focus();
             }, 500);
         }
+
+        // 2. الحساس الذكي: إخفاء الزر تلقائياً إذا نزل الزبون للشات بنفسه بدون ضغط
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                floatingBtn.classList.add('hidden');
+            }
+        }, { threshold: 0.2 }); // يعمل عندما يظهر 20% من صندوق المحادثة
+
+        observer.observe(chatSection);
     </script>
 </body>
 </html>
