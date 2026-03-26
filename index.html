@@ -10,139 +10,133 @@
             --primary: #10B981;
             --dark-green: #065F46;
             --light-bg: #F0FDF4;
-            --gray: #f3f4f6;
+            --border: #e5e7eb;
         }
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
+            margin: 0; padding: 0;
+            background-color: #f3f4f6; /* لون خلفية أهدأ */
             color: #333;
+            padding-top: 80px;
         }
-        /* الشريط العلوي الثابت */
+        
+        /* الشريط العلوي */
         .header {
-            position: fixed;
-            top: 0; width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            z-index: 1000;
+            display: flex; align-items: center;
+            padding: 10px 20px; z-index: 1000;
         }
-        .header img { height: 40px; border-radius: 5px; margin-left: 15px; }
-        .header h1 { color: var(--dark-green); font-size: 1.2rem; margin: 0; }
+        .header img { height: 45px; border-radius: 5px; margin-left: 15px; }
+        .header h1 { color: var(--dark-green); font-size: 1.3rem; margin: 0; font-weight: 700; }
         
-        /* الحاوية الرئيسية */
-        .container {
-            max-width: 800px;
-            margin: 80px auto 20px;
-            padding: 0 15px;
+        .container { max-width: 800px; margin: 0 auto; padding: 20px 15px; }
+        .section-title { text-align: right; color: var(--dark-green); margin-bottom: 5px; font-size: 1.4rem; }
+        .section-subtitle { text-align: right; color: #666; font-size: 0.95rem; margin-top: 0; margin-bottom: 20px; }
+
+        /* السلايدر */
+        .slider-container {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 15px;
+            -webkit-overflow-scrolling: touch;
         }
+        .slider-container::-webkit-scrollbar { display: none; }
         
-        /* قسم المحادثة */
+        .product-card {
+            flex: 0 0 220px; scroll-snap-align: start; background: white; border-radius: 15px;
+            border: 2px solid #A7F3D0; padding: 15px; text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .product-card img { width: 100%; height: 160px; object-fit: contain; border-radius: 10px; margin-bottom: 10px; }
+        .product-card h4 { color: var(--primary); margin: 10px 0 5px 0; font-size: 1.1rem; font-weight: 700; }
+        .product-card p { font-size: 0.85rem; color: #555; margin: 0; line-height: 1.5; }
+
+        /* صندوق المحادثة المعدل */
         .chat-box {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
+            background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            height: 60vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border);
+            margin-top: 20px;
         }
         .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
+            background-color: #ffffff;
         }
+        
+        /* إصلاح الفقاعات (السر هنا) */
         .message {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 15px;
-            line-height: 1.5;
-            font-size: 0.95rem;
+            max-width: 75%;
+            width: fit-content; /* يمنع التقلص أو التمدد الزائد */
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.6; font-size: 0.95rem;
+            word-wrap: break-word;
         }
         .bot-msg {
-            background-color: var(--light-bg);
-            color: #1f2937;
-            align-self: flex-start;
-            border-bottom-right-radius: 2px;
-            border: 1px solid #d1fae5;
+            background-color: var(--light-bg); color: #1f2937;
+            align-self: flex-start; /* الخبير على اليمين */
+            border-bottom-right-radius: 4px; border: 1px solid #d1fae5;
         }
         .user-msg {
-            background-color: var(--primary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-left-radius: 2px;
+            background-color: var(--primary); color: white;
+            align-self: flex-end; /* الزبون على اليسار */
+            border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
         }
         
         /* منطقة الإدخال */
         .input-area {
-            display: flex;
-            padding: 15px;
-            background: white;
-            border-top: 1px solid #e5e7eb;
-            gap: 10px;
+            display: flex; padding: 15px; background: white; border-top: 1px solid var(--border); gap: 10px; align-items: center;
         }
         .input-area input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #d1d5db;
-            border-radius: 25px;
-            outline: none;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
+            flex: 1; padding: 14px 20px; border: 1px solid #d1d5db; border-radius: 25px;
+            outline: none; font-family: 'Cairo', sans-serif; font-size: 0.95rem; background-color: #f9fafb;
         }
-        .input-area input:focus { border-color: var(--primary); }
+        .input-area input:focus { border-color: var(--primary); background-color: white; }
         .input-area button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
+            background-color: var(--primary); color: white; border: none; border-radius: 50%;
+            width: 48px; height: 48px; min-width: 48px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
-        .input-area button:hover { background-color: var(--dark-green); }
-        .input-area button svg { width: 20px; height: 20px; fill: white; transform: rotate(180deg); } /* تدوير السهم ليتوافق مع العربية */
+        .input-area button:hover { background-color: var(--dark-green); transform: scale(1.05); }
+        .input-area button svg { width: 22px; height: 22px; fill: white; transform: rotate(180deg); } /* سهم لليسار */
 
-        /* مؤشر الكتابة */
-        .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; }
+        .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
     </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي -->
     <div class="header">
-        <!-- تأكد من رفع صورة logo.jpg في نفس المستودع -->
-        <img src="logo.jpg.jpg" alt="Massilya Logo" onerror="this.src='https://via.placeholder.com/40x40/10B981/ffffff?text=M'">
+        <!-- تأكد من وجود صورة logo.jpg في مجلد images -->
+        <img src="images/logo.jpg" alt="Massilya Logo" onerror="this.src='https://via.placeholder.com/45x45/10B981/ffffff?text=M'">
         <h1>مختبرات Massilya</h1>
     </div>
 
-    <!-- الحاوية الرئيسية للمحادثة -->
     <div class="container">
-        <h2 style="text-align: center; color: var(--dark-green); margin-bottom: 20px;">💬 استشارة العناية بالبشرة</h2>
+        <h2 class="section-title">✨ تشكيلة منتجاتنا المتخصصة</h2>
+        <p class="section-subtitle">👈 اسحب لليمين واليسار لتصفح المنتجات</p>
         
+        <div class="slider-container">
+            <!-- المنتجات -->
+            <div class="product-card"><img src="images/chicken.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème 30% Urée</h4><p>علاج فعال لجلد الدجاجة والخشونة</p></div>
+            <div class="product-card"><img src="images/produit.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Lotion Anti-Chute</h4><p>محلول مكثف لعلاج تساقط الشعر</p></div>
+            <div class="product-card"><img src="images/2acide.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Gel Exfoliant 2% BHA</h4><p>مقشر قوي لحب الشباب</p></div>
+            <div class="product-card"><img src="images/champo.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Anti-Pelliculaire</h4><p>علاج نهائي للقشرة</p></div>
+            <div class="product-card"><img src="images/oily.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Nettoyant Purifiant</h4><p>منظف عميق للبشرة الدهنية</p></div>
+            <div class="product-card"><img src="images/dry.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Gel Ultra Doux</h4><p>عناية للبشرة الجافة والحساسة</p></div>
+            <div class="product-card"><img src="images/hab_chbab.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Peaux Acnéiques</h4><p>للبشرة المعرضة للحبوب</p></div>
+            <div class="product-card"><img src="images/jel.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème de Douche</h4><p>كريم استحمام للترطيب</p></div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 20px;">💬 استشارة العناية بالبشرة</h2>
         <div class="chat-box">
             <div class="chat-messages" id="chat-messages">
-                <!-- رسالة الترحيب الافتراضية -->
                 <div class="message bot-msg">
                     أهلاً ومرحباً بكم في مختبرات Massilya! 🧴 أنا طبيب وخبير العناية بالبشرة والشعر. كيف يمكنني مساعدتكم اليوم؟
                 </div>
             </div>
-            
             <div class="typing-indicator" id="typing">الخبير يكتب الآن... ⏳</div>
-            
             <div class="input-area">
                 <input type="text" id="user-input" placeholder="اكتبوا سؤالكم لخبير Massilya الآلي..." onkeypress="handleKeyPress(event)">
                 <button onclick="sendMessage()">
@@ -153,52 +147,25 @@
     </div>
 
     <script>
-        // هذا الكود البرمجي سيتكفل بالرسم على الشاشة وإرسال الطلب للسيرفر (الذي سنبنيه لاحقاً)
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const typingIndicator = document.getElementById('typing');
 
-        // رابط السيرفر (Backend) الذي سنقوم بإنشائه في المرحلة القادمة
-        const BACKEND_URL = "https://your-future-backend-url.onrender.com/chat"; 
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
+        function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
 
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
-
-            // 1. عرض رسالة الزبون
+            
             appendMessage(text, 'user-msg');
             userInput.value = '';
-            
-            // 2. إظهار "الخبير يكتب..."
             typingIndicator.style.display = 'block';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            try {
-                // ملاحظة: هذا الجزء معطل مؤقتاً حتى نبني الـ Backend
-                /*
-                const response = await fetch(BACKEND_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
-                });
-                const data = await response.json();
-                appendMessage(data.reply, 'bot-msg');
-                */
-                
-                // محاكاة مؤقتة لرد البوت (لتجربة شكل الواجهة فقط)
-                setTimeout(() => {
-                    appendMessage("مرحباً بك! السيرفر الذكي قيد الإنشاء حالياً (المرحلة الثانية). سنكون جاهزين قريباً جداً! 🚀", 'bot-msg');
-                    typingIndicator.style.display = 'none';
-                }, 1500);
-
-            } catch (error) {
-                appendMessage("عذراً، حدث خطأ في الاتصال بالخادم.", 'bot-msg');
+            setTimeout(() => {
+                appendMessage("مرحباً بك! السيرفر الذكي قيد الإنشاء حالياً (المرحلة الثانية). سنكون جاهزين قريباً جداً! 🚀", 'bot-msg');
                 typingIndicator.style.display = 'none';
-            }
+            }, 1000);
         }
 
         function appendMessage(text, className) {
