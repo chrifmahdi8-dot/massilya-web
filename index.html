@@ -94,9 +94,7 @@
 
         .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
 
-        /* ========================================= */
-        /* الزر العائم الاحترافي + كلاس الإخفاء */
-        /* ========================================= */
+        /* الزر العائم */
         .floating-chat-btn {
             position: fixed; bottom: 25px; left: 25px;
             background-color: var(--primary); color: white;
@@ -119,12 +117,9 @@
         }
         .floating-chat-btn:hover .tooltip { opacity: 1; transform: translateX(0); }
 
-        /* الكلاس السحري لإخفاء الزر نهائياً */
+        /* كلاس الإخفاء */
         .floating-chat-btn.hidden {
-            opacity: 0;
-            transform: scale(0) !important;
-            pointer-events: none;
-            animation: none;
+            opacity: 0; transform: scale(0) !important; pointer-events: none; animation: none;
         }
 
         @keyframes pulse-animation {
@@ -214,20 +209,22 @@
         // 1. التزحلق الناعم والإخفاء عند الضغط
         function scrollToChat() {
             chatSection.scrollIntoView({ behavior: 'smooth' });
-            floatingBtn.classList.add('hidden'); // إخفاء الزر فوراً
-            setTimeout(() => {
-                userInput.focus();
-            }, 500);
+            floatingBtn.classList.add('hidden'); // إخفاء الزر
+            setTimeout(() => { userInput.focus(); }, 500);
         }
 
-        // 2. الحساس الذكي: إخفاء الزر تلقائياً إذا نزل الزبون للشات بنفسه بدون ضغط
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
+        // 2. إخفاء الزر إذا قام الزبون بالنزول للأسفل يدوياً (تجاوز السلايدر)
+        window.addEventListener('scroll', function() {
+            // إذا نزل الزبون أكثر من 150 بيكسل سيختفي الزر
+            if (window.scrollY > 150) {
                 floatingBtn.classList.add('hidden');
             }
-        }, { threshold: 0.2 }); // يعمل عندما يظهر 20% من صندوق المحادثة
+        });
 
-        observer.observe(chatSection);
+        // 3. إخفاء الزر إذا لمس الزبون خانة الكتابة مباشرة
+        userInput.addEventListener('focus', function() {
+            floatingBtn.classList.add('hidden');
+        });
     </script>
 </body>
 </html>
