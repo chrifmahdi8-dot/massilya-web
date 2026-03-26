@@ -181,21 +181,41 @@
         const floatingBtn = document.getElementById('floating-btn');
         const chatSection = document.getElementById('chat-section');
 
+        // 🌟 الرابط السحري لسيرفرك
+        const BACKEND_URL = "https://massilya-dermo.onrender.com/chat";
+
         function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
 
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
             
+            // 1. عرض رسالة الزبون
             appendMessage(text, 'user-msg');
             userInput.value = '';
             typingIndicator.style.display = 'block';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            setTimeout(() => {
-                appendMessage("مرحباً بك! السيرفر الذكي قيد الإنشاء حالياً (المرحلة الثانية). سنكون جاهزين قريباً جداً! 🚀", 'bot-msg');
+            try {
+                // 2. إرسال الطلب للسيرفر
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                
+                if (!response.ok) throw new Error("Network Error");
+                
+                // 3. استقبال وطباعة الرد
+                const data = await response.json();
                 typingIndicator.style.display = 'none';
-            }, 1000);
+                appendMessage(data.reply, 'bot-msg');
+                
+            } catch (error) {
+                console.error("Error:", error);
+                typingIndicator.style.display = 'none';
+                appendMessage("عذراً، الأطباء في المختبر مشغولون حالياً باستشارات أخرى. يرجى المحاولة بعد قليل! ⏳", 'bot-msg');
+            }
         }
 
         function appendMessage(text, className) {
@@ -206,22 +226,19 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // 1. التزحلق الناعم والإخفاء عند الضغط
+        // دوال الزر العائم (للتزحلق والإخفاء)
         function scrollToChat() {
             chatSection.scrollIntoView({ behavior: 'smooth' });
             floatingBtn.classList.add('hidden'); // إخفاء الزر
             setTimeout(() => { userInput.focus(); }, 500);
         }
 
-        // 2. إخفاء الزر إذا قام الزبون بالنزول للأسفل يدوياً (تجاوز السلايدر)
         window.addEventListener('scroll', function() {
-            // إذا نزل الزبون أكثر من 150 بيكسل سيختفي الزر
             if (window.scrollY > 150) {
                 floatingBtn.classList.add('hidden');
             }
         });
 
-        // 3. إخفاء الزر إذا لمس الزبون خانة الكتابة مباشرة
         userInput.addEventListener('focus', function() {
             floatingBtn.classList.add('hidden');
         });
