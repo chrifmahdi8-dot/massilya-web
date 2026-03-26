@@ -15,7 +15,7 @@
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0; padding: 0;
-            background-color: #f3f4f6; /* لون خلفية أهدأ */
+            background-color: #f3f4f6;
             color: #333;
             padding-top: 80px;
         }
@@ -54,7 +54,7 @@
         .product-card h4 { color: var(--primary); margin: 10px 0 5px 0; font-size: 1.1rem; font-weight: 700; }
         .product-card p { font-size: 0.85rem; color: #555; margin: 0; line-height: 1.5; }
 
-        /* صندوق المحادثة المعدل */
+        /* صندوق المحادثة */
         .chat-box {
             background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             height: 60vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border);
@@ -65,30 +65,20 @@
             background-color: #ffffff;
         }
         
-        /* إصلاح الفقاعات (السر هنا) */
         .message {
-            max-width: 75%;
-            width: fit-content; /* يمنع التقلص أو التمدد الزائد */
-            padding: 12px 18px;
-            border-radius: 18px;
-            line-height: 1.6; font-size: 0.95rem;
-            word-wrap: break-word;
+            max-width: 75%; width: fit-content; padding: 12px 18px; border-radius: 18px;
+            line-height: 1.6; font-size: 0.95rem; word-wrap: break-word;
         }
         .bot-msg {
-            background-color: var(--light-bg); color: #1f2937;
-            align-self: flex-start; /* الخبير على اليمين */
+            background-color: var(--light-bg); color: #1f2937; align-self: flex-start;
             border-bottom-right-radius: 4px; border: 1px solid #d1fae5;
         }
         .user-msg {
-            background-color: var(--primary); color: white;
-            align-self: flex-end; /* الزبون على اليسار */
+            background-color: var(--primary); color: white; align-self: flex-end;
             border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
         }
         
-        /* منطقة الإدخال */
-        .input-area {
-            display: flex; padding: 15px; background: white; border-top: 1px solid var(--border); gap: 10px; align-items: center;
-        }
+        .input-area { display: flex; padding: 15px; background: white; border-top: 1px solid var(--border); gap: 10px; align-items: center; }
         .input-area input {
             flex: 1; padding: 14px 20px; border: 1px solid #d1d5db; border-radius: 25px;
             outline: none; font-family: 'Cairo', sans-serif; font-size: 0.95rem; background-color: #f9fafb;
@@ -100,15 +90,46 @@
             display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
         .input-area button:hover { background-color: var(--dark-green); transform: scale(1.05); }
-        .input-area button svg { width: 22px; height: 22px; fill: white; transform: rotate(180deg); } /* سهم لليسار */
+        .input-area button svg { width: 22px; height: 22px; fill: white; transform: rotate(180deg); }
 
         .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
+
+        /* ========================================= */
+        /* 🚀 الإضافة الجديدة: الزر العائم الاحترافي */
+        /* ========================================= */
+        .floating-chat-btn {
+            position: fixed; bottom: 25px; left: 25px; /* يظهر في أسفل اليسار */
+            background-color: var(--primary); color: white;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            cursor: pointer; z-index: 9999;
+            transition: transform 0.3s;
+            animation: pulse-animation 2s infinite; /* تأثير النبض الجذاب */
+        }
+        .floating-chat-btn:hover { transform: scale(1.1); background-color: var(--dark-green); }
+        .floating-chat-btn svg { width: 30px; height: 30px; fill: white; }
+        
+        /* التلميح الذي يخرج من الزر */
+        .floating-chat-btn .tooltip {
+            position: absolute; left: 75px; 
+            background-color: white; color: var(--dark-green);
+            padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); white-space: nowrap; pointer-events: none;
+            opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateX(-10px);
+        }
+        .floating-chat-btn:hover .tooltip { opacity: 1; transform: translateX(0); }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <!-- تأكد من وجود صورة logo.jpg في مجلد images -->
         <img src="logo.jpg.jpg" alt="Massilya Logo" onerror="this.src='https://via.placeholder.com/45x45/10B981/ffffff?text=M'">
         <h1>مختبرات Massilya</h1>
     </div>
@@ -129,7 +150,8 @@
             <div class="product-card"><img src="jel.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème de Douche</h4><p>كريم استحمام للترطيب</p></div>
         </div>
 
-        <h2 class="section-title" style="margin-top: 20px;">💬 استشارة العناية بالبشرة</h2>
+        <!-- تم إضافة ID هنا لكي يعرف الزر أين يتجه -->
+        <h2 id="chat-section" class="section-title" style="margin-top: 20px;">💬 استشارة العناية بالبشرة</h2>
         <div class="chat-box">
             <div class="chat-messages" id="chat-messages">
                 <div class="message bot-msg">
@@ -144,6 +166,13 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- 🚀 الإضافة الجديدة: عنصر الزر العائم في HTML -->
+    <div class="floating-chat-btn" onclick="scrollToChat()">
+        <!-- أيقونة المحادثة -->
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        <div class="tooltip">تحدث مع الخبير الآن</div>
     </div>
 
     <script>
@@ -174,6 +203,17 @@
             msgDiv.innerText = text;
             chatMessages.appendChild(msgDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // 🚀 دالة التزحلق الناعم عند الضغط على الزر العائم
+        function scrollToChat() {
+            const chatSection = document.getElementById('chat-section');
+            // النزول بنعومة
+            chatSection.scrollIntoView({ behavior: 'smooth' });
+            // وضع مؤشر الماوس/لوحة المفاتيح داخل خانة الكتابة تلقائياً بعد نصف ثانية
+            setTimeout(() => {
+                document.getElementById('user-input').focus();
+            }, 500);
         }
     </script>
 </body>
