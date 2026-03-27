@@ -90,6 +90,7 @@
             display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
         .input-area button:hover { background-color: var(--dark-green); transform: scale(1.05); }
+        .input-area button:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; }
         .input-area button svg { width: 22px; height: 22px; fill: white; transform: rotate(180deg); }
 
         .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
@@ -161,7 +162,7 @@
             <div class="typing-indicator" id="typing">الخبير يكتب الآن... ⏳</div>
             <div class="input-area">
                 <input type="text" id="user-input" placeholder="اكتبوا سؤالكم لخبير Massilya الآلي..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">
+                <button id="send-btn" onclick="sendMessage()">
                     <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                 </button>
             </div>
@@ -180,9 +181,13 @@
         const typingIndicator = document.getElementById('typing');
         const floatingBtn = document.getElementById('floating-btn');
         const chatSection = document.getElementById('chat-section');
+        const sendBtn = document.getElementById('send-btn');
 
         // 🌟 الرابط السحري لسيرفرك
         const BACKEND_URL = "https://massilya-dermo.onrender.com/chat";
+
+        // 🧠 الذاكرة المؤقتة للمحادثة (هذا ما كان ينقصنا)
+        let chatHistory = [];
 
         function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
 
@@ -194,14 +199,18 @@
             appendMessage(text, 'user-msg');
             userInput.value = '';
             typingIndicator.style.display = 'block';
+            sendBtn.disabled = true; // إقفال الزر لمنع الإرسال المزدوج
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                // 2. إرسال الطلب للسيرفر
+                // 2. إرسال الطلب للسيرفر مع الذاكرة كاملة 🚀
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
+                    body: JSON.stringify({ 
+                        message: text,
+                        history: chatHistory // هنا نرسل الذاكرة
+                    })
                 });
                 
                 if (!response.ok) throw new Error("Network Error");
@@ -211,10 +220,16 @@
                 typingIndicator.style.display = 'none';
                 appendMessage(data.reply, 'bot-msg');
                 
+                // 4. حفظ المحادثة في الذاكرة للسؤال القادم 🧠
+                chatHistory.push({ role: "user", content: text });
+                chatHistory.push({ role: "assistant", content: data.reply });
+                
             } catch (error) {
                 console.error("Error:", error);
                 typingIndicator.style.display = 'none';
                 appendMessage("عذراً، الأطباء في المختبر مشغولون حالياً باستشارات أخرى. يرجى المحاولة بعد قليل! ⏳", 'bot-msg');
+            } finally {
+                sendBtn.disabled = false; // إعادة تفعيل الزر
             }
         }
 
