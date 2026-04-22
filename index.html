@@ -76,16 +76,57 @@
             40% { transform: scale(1); opacity: 1; }
         }
 
-        /* نمط الزليج المضاف لمنطقة الدردشة */
+        /* ===== خلفية مياه نقية مع أوراق شاي ===== */
         .chat-zellige {
-            background-color: #f8fafc;
-            background-image: 
-                linear-gradient(45deg, rgba(14,165,233,0.04) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(14,165,233,0.04) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(14,165,233,0.04) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(14,165,233,0.04) 75%);
-            background-size: 40px 40px;
-            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg,
+                    rgba(219, 238, 255, 0.82) 0%,
+                    rgba(240, 249, 255, 0.65) 40%,
+                    rgba(255, 255, 255, 0.55) 100%
+                ),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Cdefs%3E%3CradialGradient id='w1' cx='30%25' cy='40%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23bae6fd'/%3E%3Cstop offset='100%25' stop-color='%2338bdf8'/%3E%3C/radialGradient%3E%3CradialGradient id='w2' cx='70%25' cy='60%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23e0f2fe'/%3E%3Cstop offset='100%25' stop-color='%230ea5e9'/%3E%3C/radialGradient%3E%3Cfilter id='blur'%3E%3CfeGaussianBlur stdDeviation='8'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='600' height='400' fill='url(%23w1)'/%3E%3Cellipse cx='420' cy='180' rx='260' ry='200' fill='url(%23w2)' opacity='0.5' filter='url(%23blur)'/%3E%3Cellipse cx='100' cy='300' rx='180' ry='140' fill='%23bae6fd' opacity='0.4' filter='url(%23blur)'/%3E%3C!-- تموجات الماء --%3E%3Cellipse cx='300' cy='200' rx='120' ry='18' fill='none' stroke='%23ffffff' stroke-width='1.5' opacity='0.45'/%3E%3Cellipse cx='300' cy='200' rx='80' ry='12' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.35'/%3E%3Cellipse cx='300' cy='200' rx='44' ry='6' fill='none' stroke='%23ffffff' stroke-width='0.8' opacity='0.3'/%3E%3Cellipse cx='140' cy='310' rx='90' ry='13' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.3'/%3E%3Cellipse cx='140' cy='310' rx='55' ry='8' fill='none' stroke='%23ffffff' stroke-width='0.8' opacity='0.25'/%3E%3Cellipse cx='470' cy='100' rx='75' ry='11' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.3'/%3E%3Cellipse cx='470' cy='100' rx='45' ry='7' fill='none' stroke='%23ffffff' stroke-width='0.7' opacity='0.22'/%3E%3C!-- بريق الماء --%3E%3Cellipse cx='180' cy='130' rx='18' ry='6' fill='%23ffffff' opacity='0.55' transform='rotate(-30 180 130)'/%3E%3Cellipse cx='420' cy='280' rx='22' ry='7' fill='%23ffffff' opacity='0.4' transform='rotate(20 420 280)'/%3E%3Cellipse cx='90' cy='200' rx='12' ry='4' fill='%23ffffff' opacity='0.45' transform='rotate(-15 90 200)'/%3E%3Cellipse cx='520' cy='330' rx='15' ry='5' fill='%23ffffff' opacity='0.38' transform='rotate(10 520 330)'/%3E%3C/svg%3E") center/cover no-repeat;
+        }
+
+        /* أوراق الشاي الأخضر - يسار */
+        .chat-zellige::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 110px;
+            height: 320px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 320'%3E%3C!-- ورقة 1 --%3E%3Cpath d='M55 260 Q10 230 18 180 Q26 130 55 145 Q84 130 92 180 Q100 230 55 260Z' fill='%2386efac' opacity='0.55'/%3E%3Cline x1='55' y1='260' x2='55' y2='145' stroke='%2322c55e' stroke-width='1.2' opacity='0.6'/%3E%3Cline x1='55' y1='220' x2='35' y2='195' stroke='%2322c55e' stroke-width='0.7' opacity='0.4'/%3E%3Cline x1='55' y1='200' x2='72' y2='178' stroke='%2322c55e' stroke-width='0.7' opacity='0.4'/%3E%3Cline x1='55' y1='180' x2='38' y2='163' stroke='%2322c55e' stroke-width='0.7' opacity='0.35'/%3E%3C!-- ورقة 2 --%3E%3Cpath d='M55 140 Q15 115 20 72 Q25 30 55 42 Q85 30 90 72 Q95 115 55 140Z' fill='%234ade80' opacity='0.5' transform='rotate(-12 55 90)'/%3E%3Cline x1='55' y1='140' x2='55' y2='42' stroke='%2316a34a' stroke-width='1' opacity='0.5' transform='rotate(-12 55 90)'/%3E%3C!-- ورقة 3 صغيرة --%3E%3Cpath d='M30 70 Q5 55 10 30 Q15 8 30 18 Q45 8 50 30 Q55 55 30 70Z' fill='%2386efac' opacity='0.4' transform='rotate(18 30 40)'/%3E%3Cline x1='30' y1='70' x2='30' y2='18' stroke='%2322c55e' stroke-width='0.8' opacity='0.4' transform='rotate(18 30 40)'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.75;
+        }
+
+        /* أوراق الشاي الأخضر - يمين */
+        .chat-zellige::after {
+            content: '';
+            position: absolute;
+            right: -18px;
+            bottom: 60px;
+            width: 100px;
+            height: 260px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 260'%3E%3Cpath d='M50 240 Q12 212 16 165 Q20 118 50 130 Q80 118 84 165 Q88 212 50 240Z' fill='%2386efac' opacity='0.5' transform='rotate(8 50 185)'/%3E%3Cline x1='50' y1='240' x2='50' y2='130' stroke='%2322c55e' stroke-width='1.1' opacity='0.55' transform='rotate(8 50 185)'/%3E%3Cline x1='50' y1='200' x2='32' y2='178' stroke='%2322c55e' stroke-width='0.7' opacity='0.38' transform='rotate(8 50 185)'/%3E%3Cline x1='50' y1='178' x2='66' y2='158' stroke='%2322c55e' stroke-width='0.7' opacity='0.38' transform='rotate(8 50 185)'/%3E%3Cpath d='M65 120 Q35 100 38 65 Q42 32 65 42 Q88 32 92 65 Q96 100 65 120Z' fill='%234ade80' opacity='0.45' transform='rotate(-15 65 76)'/%3E%3Cline x1='65' y1='120' x2='65' y2='42' stroke='%2316a34a' stroke-width='0.9' opacity='0.45' transform='rotate(-15 65 76)'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .chat-zellige > * {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -196,7 +237,7 @@
                 </div>
 
                 <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-7 pb-12 pt-4 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0 scroll-smooth">
-                    </div>
+                </div>
             </div>
         </section>
 
@@ -221,6 +262,7 @@
                         </div>
                     </aside>
 
+                    <!-- منطقة الدردشة بخلفية الزليج العربي -->
                     <div class="w-full md:w-[68%] flex flex-col relative h-full chat-zellige">
                         <header class="bg-white/80 backdrop-blur-md p-6 border-b border-slate-100 flex justify-between items-center z-10">
                             <div class="flex items-center gap-4 text-start">
@@ -235,7 +277,7 @@
                         </header>
 
                         <div class="flex-1 min-h-0 p-8 overflow-y-auto hide-scrollbar flex flex-col gap-6" id="chat-messages">
-                            </div>
+                        </div>
 
                         <div class="px-6 py-3 flex flex-wrap gap-2 bg-white border-t border-slate-50 relative z-10">
                             <button onclick="fillSuggestion('أعاني من حب الشباب المستمر')" class="px-4 py-2 bg-slate-50 hover:bg-medical-50 text-slate-600 border border-slate-100 rounded-full text-[11px] font-bold transition-all">حب الشباب</button>
@@ -299,45 +341,12 @@
 
     <script>
         const products = [
-            {
-                badge: "Bestseller",
-                category: "Peau à Tendance Acnéique",
-                title: "Gel Exfoliant 2% BHA",
-                description: "مقشر طبي قوي لاستهداف حب الشباب، الرؤوس السوداء، وتقليص المسام بتركيبة متطورة.",
-                image: "2acide.jpeg"
-            },
-            {
-                category: "Cuir Chevelu",
-                title: "Anti-Pelliculaire",
-                description: "علاج متقدم للقضاء على قشرة الرأس المستعصية وتهدئة فروة الرأس المتهيجة.",
-                image: "champo.png"
-            },
-            {
-                category: "Peau Grasse",
-                title: "Nettoyant Purifiant",
-                description: "جل منظف ينقي البشرة الدهنية بعمق وينظم إفراز الدهون دون تجفيف البشرة.",
-                image: "oily.jpeg"
-            },
-            {
-                badge: "Doux",
-                category: "Peau Sensible",
-                title: "Gel Ultra Doux",
-                description: "تركيبة خالية من الصابون لتنظيف البشرة الجافة والحساسة بلطف فائق وأمان تام.",
-                image: "dry.png"
-            },
-            {
-                category: "Soins Corps",
-                title: "Crème 30% Urée",
-                description: "علاج مكثف للتقرن الجريبي والخشونة الشديدة، يعيد مرونة الجلد ونعومته.",
-                image: "chicken.jpeg"
-            },
-            {
-                badge: "Nouveau",
-                category: "Soins Capillaires",
-                title: "Lotion Anti-Chute",
-                description: "مصل طبي مقوي لبصيلات الشعر يحد من التساقط ويحفز نمو الشعر الصحي.",
-                image: "produit.jpeg"
-            }
+            { badge: "Bestseller", category: "Peau à Tendance Acnéique", title: "Gel Exfoliant 2% BHA", description: "مقشر طبي قوي لاستهداف حب الشباب، الرؤوس السوداء، وتقليص المسام بتركيبة متطورة.", image: "2acide.jpeg" },
+            { category: "Cuir Chevelu", title: "Anti-Pelliculaire", description: "علاج متقدم للقضاء على قشرة الرأس المستعصية وتهدئة فروة الرأس المتهيجة.", image: "champo.png" },
+            { category: "Peau Grasse", title: "Nettoyant Purifiant", description: "جل منظف ينقي البشرة الدهنية بعمق وينظم إفراز الدهون دون تجفيف البشرة.", image: "oily.jpeg" },
+            { badge: "Doux", category: "Peau Sensible", title: "Gel Ultra Doux", description: "تركيبة خالية من الصابون لتنظيف البشرة الجافة والحساسة بلطف فائق وأمان تام.", image: "dry.png" },
+            { category: "Soins Corps", title: "Crème 30% Urée", description: "علاج مكثف للتقرن الجريبي والخشونة الشديدة، يعيد مرونة الجلد ونعومته.", image: "chicken.jpeg" },
+            { badge: "Nouveau", category: "Soins Capillaires", title: "Lotion Anti-Chute", description: "مصل طبي مقوي لبصيلات الشعر يحد من التساقط ويحفز نمو الشعر الصحي.", image: "produit.jpeg" }
         ];
 
         function renderProducts() {
@@ -382,14 +391,12 @@
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
-            
             userInput.value = '';
             chatMessages.insertAdjacentHTML('beforeend', `
                 <div class="flex items-end justify-end gap-3 max-w-[90%] self-end text-end">
                     <div class="bg-slate-900 text-white p-5 rounded-2xl rounded-bl-sm shadow-lg text-sm font-medium">${text}</div>
                 </div>
             `);
-            
             try {
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
@@ -404,11 +411,7 @@
             }
         }
 
-        function fillSuggestion(text) {
-            userInput.value = text;
-            userInput.focus();
-        }
-
+        function fillSuggestion(text) { userInput.value = text; userInput.focus(); }
         function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
         function scrollToChat() { document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' }); }
         function scrollToProducts() { document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' }); }
