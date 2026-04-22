@@ -424,78 +424,96 @@
 </section>
 
 <!-- ═══════════════════════════════ CHAT ═══════════════════════════════ -->
-<section id="chat-section" class="py-28" style="background:var(--paper)">
-    <div class="container mx-auto px-4 lg:px-12 max-w-6xl">
+<section id="chat-section" class="py-16 md:py-28" style="background:var(--paper)">
+    <div class="container mx-auto px-0 md:px-4 lg:px-12 max-w-6xl">
 
-        <div class="text-center mb-16">
+        <div class="text-center mb-10 md:mb-16 px-4">
             <div class="badge-label mb-5 justify-center">AI Skin Assistant</div>
-            <h2 class="font-display text-4xl lg:text-5xl font-bold" style="color:var(--ink)">الاستشارة الجلدية الذكية</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold" style="color:var(--ink)">الاستشارة الجلدية الذكية</h2>
         </div>
 
-        <div class="rounded-[2rem] overflow-hidden shadow-2xl border flex flex-col md:flex-row h-[560px] md:h-[640px]" style="border-color:rgba(201,168,76,0.15)">
+        <!-- wrapper: على الموبايل يملأ الشاشة بالكامل -->
+        <div class="flex flex-col md:flex-row md:rounded-[2rem] overflow-hidden shadow-2xl border"
+             style="border-color:rgba(14,165,233,0.15); height: calc(100svh - 160px); min-height: 520px; max-height: 800px;">
 
-            <!-- Sidebar -->
+            <!-- Sidebar — مخفي على الموبايل -->
             <aside class="hidden md:flex w-[30%] flex-col shrink-0 p-10 text-start" style="background:var(--ink)">
                 <div class="mb-10">
-                    <div class="font-mono text-[0.55rem] tracking-[0.25em] uppercase mb-6" style="color:rgba(201,168,76,0.6)">Massilya AI — v2.4</div>
+                    <div class="font-mono text-[0.55rem] tracking-[0.25em] uppercase mb-6" style="color:rgba(14,165,233,0.6)">Massilya AI — v2.4</div>
                     <h3 class="font-display text-3xl font-bold leading-tight mb-5 text-white">AI Skin<br>Assistant</h3>
                     <p class="text-slate-400 text-xs leading-relaxed font-medium">
                         مساعدنا الرقمي مدرب على أحدث البروتوكولات الجلدية لتوفير تشخيص أولي دقيق وتوصيات مخصصة.
                     </p>
                 </div>
-
                 <div class="space-y-4 mt-auto">
-                    <div class="p-5 rounded-2xl border text-start" style="border-color:rgba(201,168,76,0.15);background:rgba(255,255,255,0.03)">
+                    <div class="p-5 rounded-2xl border text-start" style="border-color:rgba(14,165,233,0.15);background:rgba(255,255,255,0.03)">
                         <div class="font-mono text-[0.6rem] tracking-widest uppercase mb-2" style="color:var(--gold)">✦ دقة علمية</div>
                         <p class="text-slate-500 text-xs">Evidence-based results</p>
                     </div>
-                    <div class="p-5 rounded-2xl border text-start" style="border-color:rgba(201,168,76,0.15);background:rgba(255,255,255,0.03)">
+                    <div class="p-5 rounded-2xl border text-start" style="border-color:rgba(14,165,233,0.15);background:rgba(255,255,255,0.03)">
                         <div class="font-mono text-[0.6rem] tracking-widest uppercase mb-2" style="color:var(--gold)">✦ خصوصية تامة</div>
                         <p class="text-slate-500 text-xs">Private & confidential</p>
                     </div>
                 </div>
             </aside>
 
-            <!-- Chat area -->
-            <div class="flex-1 flex flex-col chat-bg relative">
+            <!-- Chat area — flex column يملأ المساحة المتبقية -->
+            <div class="flex-1 flex flex-col chat-bg relative overflow-hidden">
 
-                <!-- Chat header -->
-                <div class="px-8 py-5 border-b flex items-center justify-between relative z-10" style="background:rgba(254,252,248,0.9);backdrop-filter:blur(12px);border-color:rgba(201,168,76,0.1)">
-                    <div class="flex items-center gap-4 text-start">
-                        <div class="w-11 h-11 rounded-full flex items-center justify-center font-display font-bold text-white text-sm" style="background:var(--gold)">IA</div>
+                <!-- Chat header — ثابت في الأعلى -->
+                <div class="flex-shrink-0 px-5 md:px-8 py-4 md:py-5 border-b flex items-center justify-between relative z-10"
+                     style="background:rgba(240,249,255,0.95);backdrop-filter:blur(12px);border-color:rgba(14,165,233,0.1)">
+                    <div class="flex items-center gap-3 text-start">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center font-display font-bold text-white text-sm flex-shrink-0" style="background:var(--gold)">IA</div>
                         <div>
                             <div class="font-bold text-sm" style="color:var(--ink)">المستشار الجلدي الذكي</div>
                             <div class="font-mono text-[0.6rem] tracking-widest uppercase flex items-center gap-1.5" style="color:var(--sage)">
-                                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--sage)"></span>
+                                <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:var(--sage)"></span>
                                 متصل الآن
                             </div>
                         </div>
                     </div>
-                    <div class="font-mono text-[0.6rem] tracking-widest uppercase hidden md:block" style="color:rgba(201,168,76,0.5)">Protocol 04-A Active</div>
+                    <div class="font-mono text-[0.6rem] tracking-widest uppercase hidden md:block" style="color:rgba(14,165,233,0.5)">Protocol 04-A Active</div>
                 </div>
 
-                <!-- Messages -->
-                <div class="flex-1 min-h-0 p-8 overflow-y-auto hide-scrollbar flex flex-col gap-5 relative z-10" id="chat-messages"></div>
+                <!-- Messages — يتمدد ويتقلص -->
+                <div class="flex-1 min-h-0 px-4 md:px-8 py-5 overflow-y-auto hide-scrollbar flex flex-col gap-4 relative z-10"
+                     id="chat-messages"></div>
 
-                <!-- Suggestions -->
-                <div class="px-6 py-3 flex flex-wrap gap-2 border-t relative z-10" style="background:rgba(254,252,248,0.85);backdrop-filter:blur(8px);border-color:rgba(201,168,76,0.08)">
-                    <button onclick="fillSuggestion('أعاني من حب الشباب المستمر')" class="px-4 py-2 rounded-full text-[11px] font-bold border transition-all hover:border-yellow-400 hover:text-yellow-700" style="border-color:rgba(201,168,76,0.25);color:var(--ink)">حب الشباب</button>
-                    <button onclick="fillSuggestion('بشرتي حساسة جداً وتتهيج')" class="px-4 py-2 rounded-full text-[11px] font-bold border transition-all hover:border-yellow-400 hover:text-yellow-700" style="border-color:rgba(201,168,76,0.25);color:var(--ink)">بشرة حساسة</button>
-                    <button onclick="fillSuggestion('أعاني من تساقط الشعر والقشرة')" class="px-4 py-2 rounded-full text-[11px] font-bold border transition-all hover:border-yellow-400 hover:text-yellow-700" style="border-color:rgba(201,168,76,0.25);color:var(--ink)">تساقط الشعر</button>
-                </div>
+                <!-- الجزء السفلي: اقتراحات + input — ثابت في الأسفل -->
+                <div class="flex-shrink-0 relative z-10" style="background:rgba(240,249,255,0.97);backdrop-filter:blur(12px)">
 
-                <!-- Input -->
-                <div class="p-6 border-t relative z-10" style="background:rgba(254,252,248,0.95);border-color:rgba(201,168,76,0.08)">
-                    <div class="flex items-center gap-3 rounded-2xl px-5 py-4 border-2 transition-all focus-within:border-yellow-400" style="background:var(--cream);border-color:rgba(201,168,76,0.2)">
-                        <input type="text" id="user-input"
-                            placeholder="صف حالتك الطبية هنا..."
-                            class="flex-1 bg-transparent border-none outline-none text-sm font-medium placeholder-slate-400"
-                            style="color:var(--ink)"
-                            onkeypress="handleKeyPress(event)">
-                        <button onclick="sendMessage()" id="send-btn" class="btn-gold w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:shadow-md">
-                            <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                        </button>
+                    <!-- Suggestions -->
+                    <div class="px-4 md:px-6 pt-3 pb-2 flex flex-wrap gap-2 border-t" style="border-color:rgba(14,165,233,0.08)">
+                        <button onclick="fillSuggestion('أعاني من حب الشباب المستمر')"
+                                class="px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all"
+                                style="border-color:rgba(2,132,199,0.25);color:var(--blue-med);background:rgba(224,242,254,0.5)">حب الشباب</button>
+                        <button onclick="fillSuggestion('بشرتي حساسة جداً وتتهيج')"
+                                class="px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all"
+                                style="border-color:rgba(2,132,199,0.25);color:var(--blue-med);background:rgba(224,242,254,0.5)">بشرة حساسة</button>
+                        <button onclick="fillSuggestion('أعاني من تساقط الشعر والقشرة')"
+                                class="px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all"
+                                style="border-color:rgba(2,132,199,0.25);color:var(--blue-med);background:rgba(224,242,254,0.5)">تساقط الشعر</button>
                     </div>
+
+                    <!-- Input مدمج مع زر الإرسال بداخله -->
+                    <div class="px-4 md:px-6 pb-4 md:pb-6 pt-2">
+                        <div class="flex items-center rounded-2xl border-2 transition-all focus-within:border-sky-400 overflow-hidden"
+                             style="background:white;border-color:rgba(2,132,199,0.2)">
+                            <input type="text" id="user-input"
+                                placeholder="صف حالتك الطبية هنا..."
+                                class="flex-1 bg-transparent border-none outline-none text-sm font-medium placeholder-slate-400 py-4 px-4"
+                                style="color:var(--ink);min-width:0"
+                                onkeypress="handleKeyPress(event)">
+                            <button onclick="sendMessage()" id="send-btn"
+                                    class="btn-gold m-1.5 w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:shadow-md active:scale-95">
+                                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
