@@ -4,229 +4,299 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Massilya Dermo-Cosmétiques | المندوب الخبير</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #10B981;
-            --dark-green: #065F46;
-            --light-bg: #F0FDF4;
-            --border: #e5e7eb;
-            --header-height: 70px; /* الارتفاع الثابت للشريط */
-        }
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0; padding: 0;
-            background-color: #f3f4f6;
-            color: #333;
-            padding-top: var(--header-height); /* مسافة للشريط الثابت */
-            overflow-x: hidden; /* منع التمرير الأفقي */
+            background-color: #f8fafc;
         }
         
-        /* --- الشريط العلوي المحسن (Header) لحل مشكلة اللوغو --- */
-        .header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            height: var(--header-height);
-            background: rgba(255, 255, 255, 0.98); /* خلفية بيضاء شبه شفافة */
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* ترتيب العناصر من اليمين */
-            padding: 0 15px; /* مسافة داخلية جانبية */
-            z-index: 2000;
-            box-sizing: border-box; /* شمل الـ padding في الحجم */
-        }
-
-        /* 🖼️ تنسيق اللوغو الشفاف (File: images/logo.jpg) */
-        .header .logo-container {
-            height: 100%; /* ملء ارتفاع الهيدر */
-            display: flex;
-            align-items: center; /* توسيط عمودي */
-            margin-left: 10px; /* مسافة عن العنوان */
-            padding: 5px 0; /* مسافة عمودية للتحكم بالحجم */
-            box-sizing: border-box;
-        }
-
-        .header img {
-            max-height: 50px; /* أقصى ارتفاع مسموح */
-            height: auto; /* الحفاظ على الأبعاد */
-            width: auto;
-            object-fit: contain; /* ملاءمة الصورة الشفافة */
-            display: block;
-            background-color: transparent !important; /* ضمان الشفافية الإجباري */
-            border-radius: 0; /* إزالة الحواف الدائرية للوغو الشفاف */
-        }
+        /* تخصيص الألوان الأساسية للمشروع لتناسب Tailwind */
+        .text-primary { color: #10B981; }
+        .bg-primary { background-color: #10B981; }
+        .bg-primary-dark { background-color: #065F46; }
         
-        /* العنوان بجانب اللوغو */
-        .header h1 {
-            color: var(--dark-green);
-            font-size: 1.2rem;
-            margin: 0;
-            font-weight: 700;
-            white-space: nowrap; /* منع انكسار السطر */
-        }
-        /* --------------------------------------------------- */
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 20px 15px; }
-        .section-title { text-align: right; color: var(--dark-green); margin-bottom: 5px; font-size: 1.4rem; }
-        .section-subtitle { text-align: right; color: #666; font-size: 0.95rem; margin-top: 0; margin-bottom: 20px; }
-
-        /* السلايدر */
-        .slider-container {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .slider-container::-webkit-scrollbar { display: none; }
-        
-        .product-card {
-            flex: 0 0 220px; scroll-snap-align: start; background: white; border-radius: 15px;
-            border: 2px solid #A7F3D0; padding: 15px; text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .product-card img { width: 100%; height: 160px; object-fit: contain; border-radius: 10px; margin-bottom: 10px; }
-        .product-card h4 { color: var(--primary); margin: 10px 0 5px 0; font-size: 1.1rem; font-weight: 700; }
-        .product-card p { font-size: 0.85rem; color: #555; margin: 0; line-height: 1.5; }
-
-        /* صندوق المحادثة */
-        .chat-box {
-            background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            height: 60vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border);
-            margin-top: 20px;
-        }
-        .chat-messages {
-            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
-            background-color: #ffffff;
-            scroll-behavior: smooth;
-        }
-        
-        .message {
-            max-width: 75%; width: fit-content; padding: 12px 18px; border-radius: 18px;
-            line-height: 1.6; font-size: 0.95rem; word-wrap: break-word;
-        }
-        .bot-msg {
-            background-color: var(--light-bg); color: #1f2937; align-self: flex-start;
-            border-bottom-right-radius: 4px; border: 1px solid #d1fae5;
-        }
-        .user-msg {
-            background-color: var(--primary); color: white; align-self: flex-end;
-            border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
-        }
-        
-        .input-area { display: flex; padding: 15px; background: white; border-top: 1px solid var(--border); gap: 10px; align-items: center; }
-        .input-area input {
-            flex: 1; padding: 14px 20px; border: 1px solid #d1d5db; border-radius: 25px;
-            outline: none; font-family: 'Cairo', sans-serif; font-size: 0.95rem; background-color: #f9fafb;
-        }
-        .input-area input:focus { border-color: var(--primary); background-color: white; }
-        .input-area button {
-            background-color: var(--primary); color: white; border: none; border-radius: 50%;
-            width: 48px; height: 48px; min-width: 48px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: 0.2s;
-        }
-        .input-area button:hover { background-color: var(--dark-green); transform: scale(1.05); }
-        .input-area button:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; }
-        .input-area button svg { width: 22px; height: 22px; fill: white; transform: rotate(180deg); }
-
-        .typing-indicator { display: none; font-size: 0.85rem; color: #6b7280; padding: 0 20px 10px; font-style: italic; }
-
-        /* الزر العائم */
-        .floating-chat-btn {
-            position: fixed; bottom: 25px; left: 25px;
-            background-color: var(--primary); color: white;
-            width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-            cursor: pointer; z-index: 9999;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s, background-color 0.3s;
-            animation: pulse-animation 2s infinite;
-        }
-        .floating-chat-btn:hover { background-color: var(--dark-green); }
-        .floating-chat-btn svg { width: 30px; height: 30px; fill: white; }
-        
-        .floating-chat-btn .tooltip {
-            position: absolute; left: 75px; 
-            background-color: white; color: var(--dark-green);
-            padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); white-space: nowrap; pointer-events: none;
-            opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateX(-10px);
-        }
-        .floating-chat-btn:hover .tooltip { opacity: 1; transform: translateX(0); }
-
-        /* كلاس الإخفاء */
-        .floating-chat-btn.hidden {
-            opacity: 0; transform: scale(0) !important; pointer-events: none; animation: none;
+        .hero-gradient {
+            background: linear-gradient(135deg, #059669 0%, #0f766e 100%);
         }
 
-        @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        /* إخفاء شريط التمرير للسلايدر مع الحفاظ على الوظيفة */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* تأثير الطفو */
+        .floating { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* دوائر الهواتف */
-        @media (max-width: 600px) {
-            --header-height: 60px;
-            .header img { max-height: 40px; }
-            .header h1 { font-size: 1rem; }
-            .section-title { font-size: 1.1rem; }
-            .chat-messages { padding: 10px; }
-            .message { font-size: 0.85rem; padding: 8px 12px; }
-            .input-area input { font-size: 0.85rem; padding: 10px 15px; }
-            .input-area button { width: 38px; height: 38px; min-width: 38px; }
-        }
+        /* تخصيص شريط تمرير المحادثة */
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .chat-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-    <div class="header">
-        <div class="logo-container">
-            <!-- مسار اللوغو الخاص بك (تأكد من اسمه في المستودع) -->
-            <img src="Untitled design.png" alt="Massilya Logo" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/transparent/transparent?text=+';">
-        </div>
-        <h1>مختبرات Massilya</h1>
-    </div>
-
-    <div class="container">
-        <h2 class="section-title">✨ تشكيلة منتجاتنا المتخصصة</h2>
-        <p class="section-subtitle">👈 اسحب لليمين واليسار لتصفح المنتجات</p>
-        
-        <div class="slider-container">
-            <div class="product-card"><img src="2acide.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Gel Exfoliant 2% BHA</h4><p>مقشر قوي لحب الشباب</p></div>
-            <div class="product-card"><img src="champo.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Anti-Pelliculaire</h4><p>علاج نهائي للقشرة</p></div>
-            <div class="product-card"><img src="oily.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Nettoyant Purifiant</h4><p>منظف عميق للبشرة الدهنية</p></div>
-            <div class="product-card"><img src="dry.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Gel Ultra Doux</h4><p>عناية للبشرة الجافة والحساسة</p></div>
-            <div class="product-card"><img src="hab chbab.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Peaux Acnéiques</h4><p>للبشرة المعرضة للحبوب</p></div>
-            <div class="product-card"><img src="jel.png" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème de Douche</h4><p>كريم استحمام للترطيب</p></div>
-             <div class="product-card"><img src="chicken.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Crème 30% Urée</h4><p>علاج فعال لجلد الدجاجة والخشونة</p></div>
-            <div class="product-card"><img src="produit.jpeg" onerror="this.src='https://via.placeholder.com/150'"><h4>Lotion Anti-Chute</h4><p>محلول مكثف لعلاج تساقط الشعر</p></div>
-        </div>
-
-        <h2 id="chat-section" class="section-title" style="margin-top: 20px;">💬 استشارة العناية بالبشرة</h2>
-        <div class="chat-box">
-            <div class="chat-messages" id="chat-messages">
-                <div class="message bot-msg">
-                    أهلاً ومرحباً بكم في مختبرات Massilya! 🧴 أنا طبيب وخبير العناية بالبشرة والشعر. كيف يمكنني مساعدتكم اليوم؟
+    <!-- Header (الشريط العلوي) -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-100">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow-sm border border-emerald-50">
+                    <img src="Untitled design.png" alt="Massilya Logo" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/transparent/transparent?text=+';">
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-emerald-800 leading-tight">Massilya</h1>
+                    <span class="text-xs text-emerald-600 font-semibold tracking-wider block">DERMO-COSMÉTIQUES</span>
                 </div>
             </div>
-            <div class="typing-indicator" id="typing">الخبير يكتب الآن... ⏳</div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="اكتبوا سؤالكم لخبير Massilya الآلي..." onkeypress="handleKeyPress(event)">
-                <button id="send-btn" onclick="sendMessage()">
-                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                </button>
+            <button onclick="scrollToChat()" class="hidden md:flex bg-emerald-100 text-emerald-700 px-5 py-2 rounded-full font-bold hover:bg-emerald-200 transition text-sm items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                استشر الخبير مجاناً
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section (القسم الرئيسي) -->
+    <section class="relative hero-gradient py-16 lg:py-24 overflow-hidden">
+        <!-- أشكال زخرفية في الخلفية -->
+        <div class="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl -top-20 -right-20 animate-pulse"></div>
+        <div class="absolute w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl bottom-10 -left-10"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-white text-center lg:text-right">
+                    <span class="bg-white/20 text-white text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-6 backdrop-blur-sm border border-white/30">
+                        مختبرات العناية المتقدمة
+                    </span>
+                    <h2 class="text-4xl lg:text-6xl font-black mb-6 leading-tight">
+                        جمال بشرتك.. <br>
+                        <span class="text-emerald-200">مدعوم بالطب والذكاء</span>
+                    </h2>
+                    <p class="text-lg lg:text-xl opacity-90 mb-8 max-w-xl mx-auto lg:mr-0 leading-relaxed">
+                        اكتشف تشكيلتنا الواسعة من العلاجات الجلدية. هل أنت محتار؟ المندوب الخبير متواجد 24/7 لتحليل حالة بشرتك واقتراح الروتين الأمثل.
+                    </p>
+                    <button onclick="scrollToChat()" class="bg-white text-emerald-700 px-8 py-4 rounded-xl font-black text-lg shadow-2xl hover:scale-105 transition transform flex items-center justify-center gap-3 w-full sm:w-auto mx-auto lg:mx-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        ابدأ الاستشارة الآن
+                    </button>
+                </div>
+
+                <!-- Visual (Aesthetic Card representing the bot/products) -->
+                <div class="lg:w-1/2 w-full flex justify-center floating">
+                    <div class="w-full max-w-sm bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl shadow-2xl">
+                        <div class="bg-white rounded-2xl p-4 shadow-inner mb-4 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">مندوب Massilya</h4>
+                                <p class="text-xs text-emerald-600 font-semibold">متصل الآن 🟢</p>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-500/20 rounded-xl p-4 border border-white/20 text-white text-sm leading-relaxed">
+                            "مرحباً! أنا هنا لمساعدتك في التخلص من حب الشباب، القشرة، أو الجفاف. أخبرني عن طبيعة بشرتك لكي أصف لك المنتج المناسب من مختبراتنا."
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Products Slider Section (قسم المنتجات المحسن) -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2">✨ تشكيلة منتجاتنا</h2>
+                    <p class="text-gray-500">حلول طبية متخصصة لجميع مشاكل البشرة والشعر</p>
+                </div>
+                <div class="hidden sm:block text-emerald-600 animate-pulse">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
+            </div>
+
+            <!-- Slider -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                
+                <!-- Product Card 1 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center relative">
+                        <span class="absolute top-3 right-3 bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-lg">الأكثر مبيعاً</span>
+                        <img src="2acide.jpeg" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Gel Exfoliant 2% BHA</h4>
+                        <p class="text-sm text-gray-500">مقشر قوي لحب الشباب والرؤوس السوداء</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="champo.png" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Anti-Pelliculaire</h4>
+                        <p class="text-sm text-gray-500">شامبو علاجي نهائي للقشرة المزعجة</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="oily.jpeg" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Nettoyant Purifiant</h4>
+                        <p class="text-sm text-gray-500">منظف عميق وموازن للبشرة الدهنية</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="dry.png" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Gel Ultra Doux</h4>
+                        <p class="text-sm text-gray-500">عناية فائقة النعومة للبشرة الجافة والحساسة</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="hab chbab.png" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Peaux Acnéiques</h4>
+                        <p class="text-sm text-gray-500">غسول متخصص للبشرة المعرضة للحبوب</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="jel.png" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Crème de Douche</h4>
+                        <p class="text-sm text-gray-500">كريم استحمام غني لترطيب الجسم</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 7 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center relative">
+                         <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-lg">جديد</span>
+                        <img src="chicken.jpeg" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Crème 30% Urée</h4>
+                        <p class="text-sm text-gray-500">علاج فعال لجلد الدجاجة وخشونة الجلد</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 8 -->
+                <div class="flex-none w-[260px] snap-center bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl hover:border-emerald-200 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
+                    <div class="h-48 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="produit.jpeg" class="h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-gray-800 mb-1">Lotion Anti-Chute</h4>
+                        <p class="text-sm text-gray-500">محلول مكثف لتقوية الشعر ومنع التساقط</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Section (قسم الاستشارة الذكية المحسن) -->
+    <section id="chat-section" class="py-16 bg-gray-50 relative">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-10">
+                <span class="text-emerald-500 font-bold tracking-wider uppercase text-sm mb-2 block">مساعدك الشخصي</span>
+                <h2 class="text-3xl font-black text-gray-800">💬 استشارة العناية بالبشرة</h2>
+                <p class="text-gray-500 mt-3">تحدث مع الخبير الآلي لتحديد الروتين والمنتجات الأنسب لك</p>
+            </div>
+
+            <!-- Chat Box UI -->
+            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 h-[600px] flex flex-col overflow-hidden relative z-10">
+                <!-- Chat Header -->
+                <div class="bg-emerald-50 border-b border-emerald-100 p-4 flex items-center gap-4">
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
+                            <img src="Untitled design.png" alt="Logo" class="w-8 h-8 object-contain" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/transparent/transparent?text=+';">
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">المندوب الخبير - Massilya</h3>
+                        <p class="text-xs text-gray-500">يرد فوراً - مدعوم بالذكاء الاصطناعي</p>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="flex-1 p-6 overflow-y-auto chat-scroll flex flex-col gap-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-gray-50" id="chat-messages">
+                    
+                    <!-- Bot Initial Message -->
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="w-8 h-8 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600 text-xs font-bold">
+                            M
+                        </div>
+                        <div class="bg-white border border-gray-100 shadow-sm text-gray-700 p-4 rounded-2xl rounded-br-sm leading-relaxed text-sm md:text-base">
+                            أهلاً ومرحباً بكم في مختبرات Massilya! 🧴 أنا طبيب وخبير العناية بالبشرة والشعر. كيف يمكنني مساعدتكم اليوم؟ هل تعانون من مشكلة معينة تودون حلها؟
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Typing Indicator -->
+                <div class="px-6 py-2 bg-gray-50 text-xs text-emerald-600 font-medium italic hidden" id="typing">
+                    الخبير يكتب الآن... 
+                    <span class="inline-flex gap-1 ms-1">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce"></span>
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                    </span>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-4 bg-white border-t border-gray-100 flex items-center gap-3">
+                    <input type="text" id="user-input" placeholder="اكتبوا سؤالكم هنا (مثال: أعاني من حب الشباب...)" class="flex-1 bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-full focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block w-full p-4 outline-none transition" onkeypress="handleKeyPress(event)">
+                    
+                    <button id="send-btn" onclick="sendMessage()" class="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-md">
+                        <svg class="w-6 h-6 transform rotate-180" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 border-t border-gray-800 text-center">
+        <p class="text-sm">© 2026 Massilya Dermo-Cosmétiques. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- Floating Chat Button (الزر العائم المحسن) -->
+    <div id="floating-btn" onclick="scrollToChat()" class="fixed bottom-6 left-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer z-[99] transition-all duration-500 hover:bg-emerald-600 hover:scale-110 group">
+        <span class="absolute w-full h-full bg-emerald-400 rounded-full animate-ping opacity-75 z-[-1]"></span>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        
+        <!-- Tooltip -->
+        <div class="absolute right-[70px] bg-gray-800 text-white text-sm px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none after:content-[''] after:absolute after:top-1/2 after:-right-2 after:-translate-y-1/2 after:border-4 after:border-transparent after:border-l-gray-800">
+            تحدث مع الخبير الآن
         </div>
     </div>
 
-    <!-- الزر العائم -->
-    <div class="floating-chat-btn" id="floating-btn" onclick="scrollToChat()">
-        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-        <div class="tooltip">تحدث مع الخبير الآن</div>
-    </div>
-
+    <!-- JavaScript Logic (لم يتم تغيير المنطق، فقط تم ربطه بالـ CSS الجديد) -->
     <script>
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
@@ -235,21 +305,21 @@
         const chatSection = document.getElementById('chat-section');
         const sendBtn = document.getElementById('send-btn');
 
-        // 🌟 الرابط السحري لسيرفرك
+        // رابط الـ API الخاص بك
         const BACKEND_URL = "https://massilya-dermo.onrender.com/chat";
-
-        // 🧠 الذاكرة المؤقتة للمحادثة
         let chatHistory = [];
 
-        function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
+        function handleKeyPress(e) { 
+            if (e.key === 'Enter') sendMessage(); 
+        }
 
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
             
-            appendMessage(text, 'user-msg');
+            appendUserMessage(text);
             userInput.value = '';
-            typingIndicator.style.display = 'block';
+            typingIndicator.classList.remove('hidden');
             sendBtn.disabled = true;
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -266,44 +336,65 @@
                 if (!response.ok) throw new Error("Network Error");
                 
                 const data = await response.json();
-                typingIndicator.style.display = 'none';
-                appendMessage(data.reply, 'bot-msg');
+                typingIndicator.classList.add('hidden');
+                appendBotMessage(data.reply);
                 
                 chatHistory.push({ role: "user", content: text });
                 chatHistory.push({ role: "assistant", content: data.reply });
                 
             } catch (error) {
                 console.error("Error:", error);
-                typingIndicator.style.display = 'none';
-                appendMessage("عذراً، الأطباء في المختبر مشغولون حالياً باستشارات أخرى. يرجى المحاولة بعد قليل! ⏳", 'bot-msg');
+                typingIndicator.classList.add('hidden');
+                appendBotMessage("عذراً، الأطباء في المختبر مشغولون حالياً باستشارات أخرى. يرجى المحاولة بعد قليل! ⏳");
             } finally {
                 sendBtn.disabled = false;
             }
         }
 
-        function appendMessage(text, className) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${className}`;
-            msgDiv.innerText = text;
-            chatMessages.appendChild(msgDiv);
+        // دالة رسالة المستخدم (الأخضر)
+        function appendUserMessage(text) {
+            const msgHtml = `
+                <div class="flex items-end justify-end gap-2 max-w-[85%] self-end w-full">
+                    <div class="bg-emerald-500 text-white shadow-md p-4 rounded-2xl rounded-bl-sm leading-relaxed text-sm md:text-base break-words">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', msgHtml);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // دالة رسالة البوت (الأبيض)
+        function appendBotMessage(text) {
+            const msgHtml = `
+                <div class="flex items-end gap-2 max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600 text-xs font-bold shadow-sm border border-emerald-200">
+                        M
+                    </div>
+                    <div class="bg-white border border-gray-100 shadow-sm text-gray-700 p-4 rounded-2xl rounded-br-sm leading-relaxed text-sm md:text-base break-words whitespace-pre-line">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', msgHtml);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         // دوال الزر العائم
         function scrollToChat() {
             chatSection.scrollIntoView({ behavior: 'smooth' });
-            floatingBtn.classList.add('hidden');
-            setTimeout(() => { userInput.focus(); }, 500);
+            floatingBtn.style.transform = 'scale(0)';
+            setTimeout(() => { userInput.focus(); }, 800);
         }
 
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 150) {
-                floatingBtn.classList.add('hidden');
+            // إخفاء الزر العائم عند النزول لقسم المحادثة
+            const rect = chatSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                floatingBtn.style.transform = 'scale(0)';
+            } else {
+                floatingBtn.style.transform = 'scale(1)';
             }
-        });
-
-        userInput.addEventListener('focus', function() {
-            floatingBtn.classList.add('hidden');
         });
     </script>
 </body>
