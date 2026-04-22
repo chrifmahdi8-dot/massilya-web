@@ -75,6 +75,18 @@
             0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
             40% { transform: scale(1); opacity: 1; }
         }
+
+        /* نمط الزليج المضاف لمنطقة الدردشة */
+        .chat-zellige {
+            background-color: #f8fafc;
+            background-image: 
+                linear-gradient(45deg, rgba(14,165,233,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(14,165,233,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(14,165,233,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(14,165,233,0.04) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden selection:bg-medical-100 selection:text-medical-900 flex flex-col min-h-screen">
@@ -209,7 +221,7 @@
                         </div>
                     </aside>
 
-                    <div class="w-full md:w-[68%] flex flex-col bg-[#FDFDFD] relative h-full">
+                    <div class="w-full md:w-[68%] flex flex-col relative h-full chat-zellige">
                         <header class="bg-white/80 backdrop-blur-md p-6 border-b border-slate-100 flex justify-between items-center z-10">
                             <div class="flex items-center gap-4 text-start">
                                 <div class="w-12 h-12 bg-medical-50 rounded-full flex items-center justify-center border border-medical-200 font-bold text-medical-700 font-sans">IA</div>
@@ -222,7 +234,7 @@
                             </div>
                         </header>
 
-                        <div class="flex-1 min-h-0 p-8 overflow-y-auto hide-scrollbar flex flex-col gap-6" id="chat-messages" style="background-color: #f8fafc; background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\' viewBox=\'0 0 60 60\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%230ea5e9\' fill-opacity=\'0.06\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+                        <div class="flex-1 min-h-0 p-8 overflow-y-auto hide-scrollbar flex flex-col gap-6" id="chat-messages">
                             </div>
 
                         <div class="px-6 py-3 flex flex-wrap gap-2 bg-white border-t border-slate-50 relative z-10">
@@ -286,7 +298,6 @@
     </footer>
 
     <script>
-        // مصفوفة المنتجات (تحسين رقم 1)
         const products = [
             {
                 badge: "Bestseller",
@@ -350,7 +361,6 @@
             `).join('');
         }
 
-        // تحسين الشات والـ Backend
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const BACKEND_URL = "https://massilya-dermo.onrender.com/chat";
@@ -403,7 +413,6 @@
         function scrollToChat() { document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' }); }
         function scrollToProducts() { document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' }); }
 
-        // تهيئة الموقع
         window.onload = () => {
             renderProducts();
             appendBotMessage("مرحباً بك في مختبرات Massilya. كيف يمكنني مساعدتك في العناية ببشرتك اليوم؟");
