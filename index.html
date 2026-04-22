@@ -10,8 +10,8 @@
         /* إعدادات الخطوط والألوان المخصصة للعلامة التجارية الطبية */
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #FAFAFA; /* أبيض مائل للرمادي لراحة العين */
-            color: #1E293B; /* رمادي داكن جداً بدلاً من الأسود الصريح */
+            background-color: #FAFAFA;
+            color: #1E293B;
         }
         
         /* تخصيص شريط التمرير ليكون نحيفاً وأنيقاً */
@@ -55,7 +55,7 @@
 </head>
 <body class="overflow-x-hidden antialiased selection:bg-cyan-100 selection:text-cyan-900">
 
-    <!-- Header المينيمالي (Minimalist Header) -->
+    <!-- Header -->
     <header class="glass-panel sticky top-0 z-50 border-b border-gray-200/50 transition-all duration-300" id="header">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -72,9 +72,8 @@
         </div>
     </header>
 
-    <!-- Hero Section (الواجهة الرئيسية بلمسة عيادة) -->
+    <!-- Hero Section -->
     <section class="relative pt-20 pb-28 lg:pt-32 lg:pb-40 overflow-hidden bg-white">
-        <!-- خلفية هادئة جداً -->
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 z-0 pointer-events-none"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-cyan-50/50 to-white z-0 pointer-events-none"></div>
         
@@ -114,10 +113,7 @@
                 <!-- Abstract Clinical Visual / Teaser -->
                 <div class="lg:w-1/2 w-full relative flex justify-center opacity-0 animate-fade-in delay-300">
                     <div class="relative w-full max-w-md">
-                        <!-- الديكور الخلفي -->
                         <div class="absolute inset-0 bg-gradient-to-tr from-cyan-100 to-blue-50 rounded-[3rem] transform rotate-3 scale-105 -z-10"></div>
-                        
-                        <!-- بطاقة الاستشارة (Teaser) -->
                         <div class="bg-white p-8 rounded-[2.5rem] shadow-[0_20px_50px_rgba(15,23,42,0.05)] border border-slate-100 relative z-10">
                             <div class="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -140,7 +136,7 @@
         </div>
     </section>
 
-    <!-- المنتجات (Gamme de Produits) بأسلوب الصيدليات الفرنسية -->
+    <!-- Products Slider Section -->
     <section class="py-24 bg-slate-50 border-t border-slate-100">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -151,7 +147,6 @@
 
             <!-- Slider -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-10 pt-4 hide-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0">
-                
                 <!-- Product 1 -->
                 <div class="flex-none w-[280px] snap-center bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                     <div class="h-56 p-6 flex items-center justify-center relative overflow-hidden bg-white rounded-t-2xl">
@@ -234,10 +229,11 @@
     <section id="chat-section" class="py-24 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <!-- Terminal UI Container -->
+            <!-- تم إضافة h-[600px] لشاشات الهواتف مع overflow-hidden للحفاظ على ثبات المربع -->
             <div class="bg-white rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-200 overflow-hidden flex flex-col md:flex-row h-[600px] md:h-[700px]">
                 
-                <!-- Sidebar (معلومات العيادة/البوت) -->
-                <div class="hidden md:flex w-full md:w-1/3 bg-slate-900 text-white p-8 flex-col relative overflow-hidden border-l border-slate-800">
+                <!-- Sidebar (مخفي في الهاتف) -->
+                <div class="hidden md:flex w-full md:w-1/3 bg-slate-900 text-white p-8 flex-col relative overflow-hidden border-l border-slate-800 shrink-0">
                     <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-900/30 rounded-full blur-3xl -mr-20 -mt-20"></div>
                     
                     <div class="relative z-10">
@@ -274,10 +270,10 @@
                     </div>
                 </div>
 
-                <!-- Chat Area -->
-                <div class="w-full md:w-2/3 flex flex-col bg-slate-50 relative">
-                    <!-- Chat Header -->
-                    <div class="bg-white p-4 border-b border-slate-200 flex justify-between items-center z-10">
+                <!-- Chat Area (الإصلاح هنا: h-full لضمان ملء المساحة الأبوية) -->
+                <div class="w-full md:w-2/3 flex flex-col bg-slate-50 relative h-full">
+                    <!-- Chat Header (shrink-0 لمنعه من الانضغاط) -->
+                    <div class="bg-white p-4 border-b border-slate-200 flex justify-between items-center z-10 shrink-0">
                         <div class="flex items-center gap-3">
                             <div class="relative">
                                 <div class="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center text-cyan-700 font-bold border border-cyan-200">
@@ -295,12 +291,11 @@
                         </div>
                     </div>
 
-                    <!-- Messages Container -->
-                    <div class="flex-1 p-6 overflow-y-auto chat-scroll flex flex-col gap-6" id="chat-messages">
-                        
+                    <!-- Messages Container (min-h-0 أمر ضروري جداً لكي لا يتجاوز مساحته) -->
+                    <div class="flex-1 min-h-0 p-6 overflow-y-auto chat-scroll flex flex-col gap-6" id="chat-messages">
                         <!-- رسالة البوت الأولى -->
                         <div class="flex items-start gap-3 max-w-[90%]">
-                            <div class="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center text-slate-600 text-xs font-bold mt-1">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center text-slate-600 text-xs font-bold mt-1 shadow-inner">
                                 Dr
                             </div>
                             <div>
@@ -309,14 +304,13 @@
                                     <br><br>
                                     لمساعدتي في توجيهك للمنتج المناسب، يرجى وصف حالة بشرتك أو شعرك (مثال: بشرتي جافة جداً وتتهيج بسرعة، أو أعاني من تساقط الشعر).
                                 </div>
-                                <span class="text-[10px] text-slate-400 mt-1 ms-1">الآن</span>
+                                <span class="text-[10px] text-slate-400 mt-1 block ms-1">الآن</span>
                             </div>
                         </div>
-
                     </div>
                     
                     <!-- مؤشر الكتابة (Typing) -->
-                    <div class="px-14 py-2 text-xs text-slate-400 font-medium italic hidden" id="typing">
+                    <div class="px-14 py-2 text-xs text-slate-400 font-medium italic hidden shrink-0" id="typing">
                         يقوم بالتحليل الطبي... 
                         <span class="inline-flex gap-1 ms-1">
                             <span class="w-1 h-1 bg-slate-400 rounded-full animate-bounce"></span>
@@ -325,8 +319,8 @@
                         </span>
                     </div>
 
-                    <!-- Input Area -->
-                    <div class="p-4 bg-white border-t border-slate-200">
+                    <!-- Input Area (shrink-0 لمنعه من الاختفاء) -->
+                    <div class="p-4 bg-white border-t border-slate-200 shrink-0">
                         <div class="relative flex items-center">
                             <input type="text" id="user-input" placeholder="صف حالتك هنا..." class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-full focus:ring-0 focus:border-cyan-500 block pr-4 pl-14 py-4 outline-none transition" onkeypress="handleKeyPress(event)">
                             
@@ -453,7 +447,6 @@
         }
 
         function appendBotMessage(text) {
-            // إضافة تنسيق للنصوص التي يرجعها البوت (الخط الغامق لأسماء المنتجات مثلاً)
             const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-cyan-700">$1</strong>');
             
             const msgHtml = `
@@ -472,7 +465,6 @@
             chatMessages.insertAdjacentHTML('beforeend', msgHtml);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-
         function scrollToChat() {
             chatSection.scrollIntoView({ behavior: 'smooth' });
             if (floatingBtn) floatingBtn.style.transform = 'scale(0)';
