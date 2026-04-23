@@ -212,15 +212,6 @@
         #empty-state { display: none; }
         #empty-state.visible { display: flex; }
 
-        /* SCROLL INDICATOR */
-        .filter-scroll-hint::after {
-            content: '';
-            position: absolute; top: 0; end: 0; bottom: 0;
-            width: 40px;
-            background: linear-gradient(to left, #f8fafc, transparent);
-            pointer-events: none;
-        }
-
         /* HERO */
         .hero-bg {
             background: linear-gradient(135deg, #082f49 0%, #0369a1 50%, #0284c7 100%);
@@ -305,7 +296,7 @@
                 <span class="font-en text-xs font-bold tracking-[0.2em] text-medical-200 uppercase mb-3 block">Les Formules Massilya</span>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3">تشكيلتنا الطبية الكاملة</h1>
                 <p class="text-white/70 text-base max-w-lg leading-relaxed">
-                    تركيبات علمية مدروسة لكل مشكلة جلدية — من حب الشباب إلى الشعر، بتركيزات فعالة مثبتة سريرياً.
+                    تركيبات علمية مدروسة لكل مشكلة جلدية — من العناية اليومية إلى الحماية من الشمس.
                 </p>
             </div>
 
@@ -316,7 +307,7 @@
                 </div>
                 <div class="w-px h-12 bg-white/20"></div>
                 <div class="text-center">
-                    <div class="font-en text-3xl font-bold text-white">7</div>
+                    <div class="font-en text-3xl font-bold text-white">8</div>
                     <div class="text-white/60 text-xs font-semibold mt-0.5">فئات علاجية</div>
                 </div>
                 <div class="w-px h-12 bg-white/20"></div>
@@ -402,9 +393,6 @@
                     </span>
                     ابدأ التشخيص الذكي
                 </a>
-                <a href="index.html" class="border-2 border-white/30 text-white px-7 py-3.5 rounded-full font-bold text-sm hover:bg-white/10 transition-colors">
-                    الصفحة الرئيسية
-                </a>
             </div>
         </div>
     </div>
@@ -428,7 +416,8 @@
             <div class="flex items-start justify-between gap-4 mb-5">
                 <div class="text-start">
                     <span id="modal-category" class="font-en text-[0.6rem] font-bold tracking-[0.2em] text-medical-600 uppercase mb-1.5 block"></span>
-                    <h2 id="modal-title" class="font-en text-2xl font-bold text-slate-900"></h2>
+                    <h2 id="modal-title" class="font-sans text-2xl font-bold text-slate-900 mb-1"></h2>
+                    <div id="modal-price" class="text-medical-600 font-extrabold text-lg"></div>
                 </div>
             </div>
 
@@ -467,10 +456,6 @@
                     <div class="font-en font-bold text-xl tracking-tight text-white">Massilya</div>
                 </div>
                 <p class="text-sm text-slate-400 leading-relaxed mb-5">مختبر متخصص في تطوير أرقى حلول العناية الجلدية بناءً على أسس علمية وفعالية سريرية مثبتة.</p>
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-slate-700 bg-slate-800">
-                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="font-en text-[0.65rem] tracking-wider uppercase text-slate-300">System Online</span>
-                </div>
             </div>
             <div class="text-start">
                 <h4 class="font-bold text-white mb-5">الروابط السريعة</h4>
@@ -478,7 +463,6 @@
                     <li><a href="products.html" class="hover:text-medical-400 transition-colors">منتجاتنا العلاجية</a></li>
                     <li><a href="index.html#chat-section" class="hover:text-medical-400 transition-colors">التشخيص الذكي (AI)</a></li>
                     <li><a href="index.html#why-us" class="hover:text-medical-400 transition-colors">فلسفة المختبر</a></li>
-                    <li><a href="#" class="hover:text-medical-400 transition-colors">تواصل معنا</a></li>
                 </ul>
             </div>
             <div class="text-start">
@@ -488,13 +472,12 @@
             <div class="text-start">
                 <h4 class="font-bold text-white mb-5">مختبراتنا</h4>
                 <address class="not-italic text-sm text-slate-400 leading-loose font-en">
-                    R&D Division<br>Msila, Algeria<br>contact@massilya-lab.com
+                    R&D Division<br>Algeria<br>contact@massilya-lab.com
                 </address>
             </div>
         </div>
         <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="font-en text-xs text-slate-500 tracking-wider">&copy; 2026 Laboratoires Massilya. All rights reserved.</div>
-            <div class="text-xs text-slate-500 font-en tracking-wider">Made with <span class="text-red-500">♥</span> in Algeria</div>
         </div>
     </div>
 </footer>
@@ -503,197 +486,220 @@
     /* ═══════════════════════════════════
        DATA
     ═══════════════════════════════════ */
+    // أضفنا فئة sun لتلائم واقيات الشمس من ماسيليا
     const CATEGORIES = [
-        { id: 'all',    label: 'الكل',            labelFr: 'Tout' },
-        { id: 'acne',   label: 'بشرة بحبوب',       labelFr: 'Peau Acnéique' },
-        { id: 'oily',   label: 'بشرة دهنية',       labelFr: 'Peau Grasse' },
-        { id: 'dry',    label: 'بشرة جافة',        labelFr: 'Peau Sèche' },
-        { id: 'sensitive', label: 'بشرة حساسة',   labelFr: 'Peau Sensible' },
-        { id: 'body',   label: 'العناية بالجسم',   labelFr: 'Soins Corps' },
-        { id: 'hair',   label: 'العناية بالشعر',   labelFr: 'Soins Capillaires' },
-        { id: 'antiage',label: 'مضاد للشيخوخة',    labelFr: 'Anti-Âge' },
+        { id: 'all',       label: 'الكل',            labelFr: 'Tout' },
+        { id: 'sun',       label: 'حماية من الشمس',  labelFr: 'Solaire' },
+        { id: 'acne',      label: 'بشرة بحبوب',      labelFr: 'Peau Acnéique' },
+        { id: 'oily',      label: 'بشرة دهنية',      labelFr: 'Peau Grasse' },
+        { id: 'dry',       label: 'بشرة جافة',       labelFr: 'Peau Sèche' },
+        { id: 'sensitive', label: 'بشرة حساسة',      labelFr: 'Peau Sensible' },
+        { id: 'body',      label: 'العناية بالجسم',  labelFr: 'Soins Corps' },
+        { id: 'hair',      label: 'العناية بالشعر',  labelFr: 'Soins Capillaires' },
+        { id: 'antiage',   label: 'مضاد للشيخوخة',   labelFr: 'Anti-Âge' },
     ];
 
     const PRODUCTS = [
+        // ---------- المنتجات الـ 13 المستخلصة ---------- //
         {
-            id: 1, cat: 'acne', badge: 'bestseller',
-            title: 'Gel Exfoliant 2% BHA',
-            titleAr: 'جيل مقشر 2% BHA',
-            category: 'Peau Acnéique',
-            desc: 'مقشر طبي بحمض الساليسيليك لاستهداف حب الشباب المختبئ تحت الجلد، الرؤوس السوداء، وتقليص المسام المتضخمة بشكل مرئي.',
-            tags: ['Salicylic Acid 2%', 'BHA', 'Niacinamide'],
-            benefits: ['تفتيح المسام وإزالة الخلايا الميتة', 'تقليص ظهور الرؤوس السوداء', 'تنظيم إنتاج الدهون الزائدة', 'تأثير مضاد للالتهاب'],
-            shape: 'bottle', color: 'bg-gradient-to-b from-blue-500 to-blue-700',
+            id: 1, cat: 'hair', badge: 'bestseller',
+            title: 'لوشن ماسيليا المضاد لتساقط الشعر 150 مل',
+            titleAr: 'لوشن ماسيليا المضاد لتساقط الشعر 150 مل',
+            category: 'العناية بالشعر',
+            price: '1,100.00 دينار جزائري',
+            desc: 'لوشن مكثف يقوي بصيلات الشعر ويحد من التساقط ويحفز نمو شعر جديد وصحي.',
+            tags: ['عناية بالشعر', 'ضد التساقط', 'تقوية'],
+            benefits: ['يحد من تساقط الشعر', 'يحفز نمو الشعر الجديد', 'يقوي الجذور'],
+            shape: 'serum', color: 'bg-gradient-to-b from-emerald-500 to-emerald-700',
         },
         {
-            id: 2, cat: 'acne', badge: null,
-            title: 'Crème Purifiante Nuit',
-            titleAr: 'كريم تنقية ليلي',
-            category: 'Peau Acnéique',
-            desc: 'كريم ليلي يجمع بين Retinol بتركيز متدرج وZinc لمكافحة البثور والندبات أثناء النوم وتجديد بنية الجلد.',
-            tags: ['Retinol 0.1%', 'Zinc PCA', 'Panthenol'],
-            benefits: ['تجديد الخلايا أثناء النوم', 'تقليل ظهور الندبات الحمراء', 'ترطيب دون انسداد المسام', 'تقليل التهيج'],
-            shape: 'tube', color: 'bg-gradient-to-b from-indigo-500 to-indigo-700',
+            id: 2, cat: 'hair', badge: null,
+            title: 'شامبو ماسيليا المضاد للقشرة 200 مل',
+            titleAr: 'شامبو ماسيليا المضاد للقشرة 200 مل',
+            category: 'العناية بالشعر',
+            price: '750.00 دينار جزائري',
+            desc: 'شامبو علاجي يقضي على قشرة الرأس ويمنع ظهورها مجدداً مع تهدئة فروة الرأس.',
+            tags: ['ضد القشرة', 'عناية بالفروة'],
+            benefits: ['القضاء على القشرة', 'تهدئة الحكة', 'تنظيف عميق'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-slate-600 to-slate-800',
         },
         {
-            id: 3, cat: 'oily', badge: null,
-            title: 'Nettoyant Purifiant',
-            titleAr: 'منظف منقي للبشرة الدهنية',
-            category: 'Peau Grasse',
-            desc: 'جل منظف يستهدف البشرة الدهنية — ينقي عمقاً وينظم الدهون دون تجريد الجلد من رطوبته الطبيعية.',
-            tags: ['Zinc PCA', 'Niacinamide 5%', 'Green Tea'],
-            benefits: ['تنظيم إفراز الزهم', 'تنظيف عميق بدون جفاف', 'مضاد للأكسدة', 'مناسب للاستخدام اليومي'],
-            shape: 'bottle', color: 'bg-gradient-to-b from-teal-500 to-teal-700',
+            id: 3, cat: 'body', badge: 'hot',
+            title: 'كريم ماسيليا المضاد للخشونة، 30% يوريا، 120 مل',
+            titleAr: 'كريم ماسيليا المضاد للخشونة، 30% يوريا، 120 مل',
+            category: 'العناية بالجسم',
+            price: '850.00 دينار جزائري',
+            desc: 'علاج مكثف للتقرن الجريبي والمناطق الخشنة مثل الأكواع والركب بفضل تركيز اليوريا العالي.',
+            tags: ['يوريا 30%', 'ترطيب مكثف', 'مضاد للخشونة'],
+            benefits: ['تنعيم المناطق الخشنة', 'تقشير الخلايا الميتة', 'ترطيب عميق'],
+            shape: 'tube', color: 'bg-gradient-to-b from-blue-700 to-blue-900',
         },
         {
-            id: 4, cat: 'oily', badge: 'new',
-            title: 'Sérum Matifiant',
-            titleAr: 'سيروم مطفئ للمظهر الدهني',
-            category: 'Peau Grasse',
-            desc: 'سيروم خفيف الوزن يعمل طوال اليوم لمحاربة اللمعة الزائدة وتضييق مظهر المسام للحصول على بشرة ناعمة المظهر.',
-            tags: ['Niacinamide 10%', 'Hyaluronic Acid', 'Silica'],
-            benefits: ['تقليل اللمعة 6-8 ساعات', 'تضييق مظهر المسام', 'ترطيب خفيف غير دهني', 'تحسين نسيج البشرة'],
-            shape: 'serum', color: 'bg-gradient-to-b from-cyan-500 to-cyan-700',
+            id: 4, cat: 'hair', badge: null,
+            title: 'شامبو ماسيليا للشعر الجاف والتالف 200 مل',
+            titleAr: 'شامبو ماسيليا للشعر الجاف والتالف 200 مل',
+            category: 'العناية بالشعر',
+            price: '800.00 دينار جزائري',
+            desc: 'شامبو مغذي يعيد الحيوية والنعومة للشعر الجاف والتالف ويصلح الألياف الشعرية.',
+            tags: ['شعر جاف', 'إصلاح التلف', 'تغذية'],
+            benefits: ['ترطيب الشعر', 'إصلاح التلف', 'إعادة اللمعان'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-amber-500 to-amber-700',
         },
         {
-            id: 5, cat: 'sensitive', badge: 'doux',
-            title: 'Gel Ultra Doux',
-            titleAr: 'جيل منظف فائق اللطف',
-            category: 'Peau Sensible',
-            desc: 'تركيبة خالية من الصابون والعطور مصممة لتنظيف البشرة الجافة والحساسة بلطف فائق مع الحفاظ على حاجز البشرة.',
-            tags: ['Aloe Vera', 'Panthenol', 'Oat Extract'],
-            benefits: ['لا يحتوي على صابون أو عطور', 'يحافظ على حاجز الجلد', 'مناسب لأكثر البشرة حساسية', 'pH متوازن'],
-            shape: 'bottle', color: 'bg-gradient-to-b from-sky-400 to-sky-600',
+            id: 5, cat: 'oily', badge: null,
+            title: 'جل ماسيليا المنظف والمنقي للبشرة الدهنية 250 مل',
+            titleAr: 'جل ماسيليا المنظف والمنقي للبشرة الدهنية 250 مل',
+            category: 'بشرة دهنية',
+            price: '500.00 دينار جزائري',
+            desc: 'جل منظف ينقي البشرة بعمق، ينظم الإفرازات الدهنية ويمنع ظهور اللمعان.',
+            tags: ['بشرة دهنية', 'تنقية المسام', 'تنظيف'],
+            benefits: ['تنظيف عميق', 'تنظيم الإفرازات', 'لا يسبب جفاف'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-teal-400 to-teal-600',
         },
         {
-            id: 6, cat: 'sensitive', badge: null,
-            title: 'Crème Barrière Réparatrice',
-            titleAr: 'كريم إصلاح حاجز البشرة',
-            category: 'Peau Sensible',
-            desc: 'كريم محتوى على Ceramides و Fatty Acids لإصلاح حاجز البشرة التالف وتقليل الاحمرار والتهيج المزمن.',
-            tags: ['Ceramides', 'Fatty Acids', 'Madecassoside'],
-            benefits: ['إعادة بناء حاجز الجلد', 'تهدئة الاحمرار والحكة', 'حماية من العوامل الخارجية', 'نتائج مرئية في 48 ساعة'],
-            shape: 'tube', color: 'bg-gradient-to-b from-rose-300 to-rose-500',
+            id: 6, cat: 'acne', badge: 'new',
+            title: 'جل ماسيليا المقشر، رغوي، 2% BHA، 200 مل',
+            titleAr: 'جل ماسيليا المقشر، رغوي، 2% BHA، 200 مل',
+            category: 'بشرة بحبوب',
+            price: '950.00 دينار جزائري',
+            desc: 'جل مقشر بحمض الساليسيليك يزيل الرؤوس السوداء ويقلص المسام ويمنع تكون الحبوب.',
+            tags: ['BHA 2%', 'تقشير', 'رؤوس سوداء'],
+            benefits: ['تقشير لطيف', 'إزالة الرؤوس السوداء', 'تنقية المسام'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-sky-500 to-sky-700',
         },
         {
-            id: 7, cat: 'dry', badge: null,
-            title: 'Crème Riche Hydratante',
-            titleAr: 'كريم ترطيب مكثف',
-            category: 'Peau Sèche',
-            desc: 'كريم فائق الثراء للترطيب العميق والمطوّل — يحتبس الرطوبة ويمنع الجفاف حتى في أشد الأجواء برودة.',
-            tags: ['Hyaluronic Acid', 'Shea Butter', 'Glycerin'],
-            benefits: ['ترطيب يدوم 24 ساعة', 'تقليل التقشر والخشونة', 'إحساس فوري بالنعومة', 'مناسب للشتاء والأجواء الجافة'],
-            shape: 'tube', color: 'bg-gradient-to-b from-amber-400 to-amber-600',
+            id: 7, cat: 'sensitive', badge: null,
+            title: 'جل ماسيليا لتنظيف الوجه للبشرة العادية والمختلطة 250 مل',
+            titleAr: 'جل ماسيليا لتنظيف الوجه للبشرة العادية والمختلطة 250 مل',
+            category: 'بشرة حساسة',
+            price: '500.00 دينار جزائري',
+            desc: 'جل يومي لتنظيف الوجه بلطف، يحافظ على توازن البشرة الطبيعي ويزيل الشوائب.',
+            tags: ['عناية يومية', 'تنظيف لطيف', 'درجة حموضة معتدلة'],
+            benefits: ['تنظيف لطيف', 'حماية حاجز البشرة', 'انتعاش فوري'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-cyan-400 to-cyan-600',
         },
         {
             id: 8, cat: 'dry', badge: null,
-            title: 'Huile Sèche Visage',
-            titleAr: 'زيت بشرة جاف (للوجه)',
-            category: 'Peau Sèche',
-            desc: 'زيت بشرة جاف متعدد الاستخدامات، يمتص بسرعة ويغذي البشرة الجافة بعمق دون إحداث لمعة أو انسداد مسام.',
-            tags: ['Squalane', 'Rosehip Oil', 'Vitamin E'],
-            benefits: ['امتصاص سريع دون دهنية', 'تغذية عميقة للبشرة', 'مضاد للأكسدة القوي', 'يقلل ظهور خطوط التعبير'],
-            shape: 'serum', color: 'bg-gradient-to-b from-orange-400 to-orange-600',
+            title: 'لوشن ماسيليا المرطب 5% يوريا للبشرة شديدة الجفاف',
+            titleAr: 'لوشن ماسيليا المرطب 5% يوريا للبشرة شديدة الجفاف',
+            category: 'بشرة جافة',
+            price: '850.00 دينار جزائري',
+            desc: 'لوشن مرطب يحتوي على 5% يوريا لتوفير ترطيب فوري وعميق للبشرة شديدة الجفاف.',
+            tags: ['يوريا 5%', 'ترطيب يومي', 'بشرة شديدة الجفاف'],
+            benefits: ['ترطيب يدوم طويلا', 'تخفيف الحكة والجفاف', 'امتصاص سريع'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-indigo-400 to-indigo-600',
         },
         {
-            id: 9, cat: 'body', badge: 'bestseller',
-            title: 'Crème Urée 30%',
-            titleAr: 'كريم اليوريا 30%',
-            category: 'Soins Corps',
-            desc: 'علاج مكثف للتقرن الجريبي (Keratosis Pilaris)، والأكواع والكعوب المتشققة، يعيد للجلد مرونته ونعومته بشكل استثنائي.',
-            tags: ['Urea 30%', 'Lactic Acid', 'Emollient'],
-            benefits: ['علاج التقرن الجريبي المستعصي', 'تليين الأكواع والكعوب', 'تقشير كيميائي لطيف', 'نتائج في أسبوع واحد'],
-            shape: 'tube', color: 'bg-gradient-to-b from-slate-500 to-slate-700',
+            id: 9, cat: 'dry', badge: 'bestseller',
+            title: 'لوشن ماسيليا المرطب 10% يوريا للبشرة شديدة الجفاف',
+            titleAr: 'لوشن ماسيليا المرطب 10% يوريا للبشرة شديدة الجفاف',
+            category: 'بشرة جافة',
+            price: '1,050.00 دينار جزائري',
+            desc: 'لوشن مكثف بتركيز 10% يوريا لعلاج الجفاف الشديد وتقشر الجلد بشكل فعال.',
+            tags: ['يوريا 10%', 'عناية فائقة', 'علاج الجفاف'],
+            benefits: ['ترطيب مكثف جداً', 'إزالة القشور', 'نعومة ملحوظة'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-indigo-600 to-indigo-800',
         },
         {
             id: 10, cat: 'body', badge: null,
-            title: 'Lotion Hydratante Corps',
+            title: 'كريم ماسيليا المنظف للاستحمام 400 مل',
+            titleAr: 'كريم ماسيليا المنظف للاستحمام 400 مل',
+            category: 'العناية بالجسم',
+            price: '500.00 دينار جزائري',
+            desc: 'كريم استحمام لطيف ينظف الجسم ويرطبه في خطوة واحدة دون الإضرار بحاجز الجلد.',
+            tags: ['استحمام', 'كريم منظف', 'عناية بالجسم'],
+            benefits: ['تنظيف بدون جفاف', 'ترطيب أثناء الاستحمام', 'مناسب للاستعمال اليومي'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-rose-400 to-rose-600',
+        },
+        {
+            id: 11, cat: 'acne', badge: null,
+            title: 'جل ماسيليا الرغوي للبشرة المعرضة لحب الشباب 250 مل',
+            titleAr: 'جل ماسيليا الرغوي للبشرة المعرضة لحب الشباب 250 مل',
+            category: 'بشرة بحبوب',
+            price: '500.00 دينار جزائري',
+            desc: 'غسول رغوي مخصص للبشرة المعرضة للحبوب، يقلل الالتهابات ويزيل الدهون المتراكمة.',
+            tags: ['حب الشباب', 'غسول رغوي', 'تنقية'],
+            benefits: ['تقليل الحبوب', 'مضاد للبكتيريا', 'تنظيف المسام'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-emerald-400 to-emerald-600',
+        },
+        {
+            id: 12, cat: 'body', badge: 'doux',
+            title: 'جل استحمام ماسيليا فائق الترطيب بالجلسرين ٥٪ / ٢٥٠ مل',
+            titleAr: 'جل استحمام ماسيليا فائق الترطيب بالجلسرين ٥٪ / ٢٥٠ مل',
+            category: 'العناية بالجسم',
+            price: '500.00 دينار جزائري',
+            desc: 'جل استحمام غني بالجلسرين لترطيب فائق ونعومة تدوم حتى بعد الاستحمام.',
+            tags: ['جلسرين 5%', 'ترطيب فائق', 'جل استحمام'],
+            benefits: ['نعومة فائقة', 'حماية من الجفاف', 'رغوة غنية'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-fuchsia-400 to-fuchsia-600',
+        },
+        {
+            id: 13, cat: 'dry', badge: null,
+            title: 'لوشن ماسيليا المرطب للجسم والوجه للبشرة الجافة 5%',
+            titleAr: 'لوشن ماسيليا المرطب للجسم والوجه للبشرة الجافة 5%',
+            category: 'بشرة جافة',
+            price: '850.00 دينار جزائري',
+            desc: 'لوشن متعدد الاستخدامات للوجه والجسم، يوفر الترطيب اللازم للبشرة الجافة بتركيبة خفيفة.',
+            tags: ['وجه وجسم', 'بشرة جافة', 'ترطيب خفيف'],
+            benefits: ['استخدام مزدوج', 'سريع الامتصاص', 'ترطيب متوازن'],
+            shape: 'tube', color: 'bg-gradient-to-b from-cyan-500 to-cyan-700',
+        },
+
+        // ---------- الـ 5 منتجات كـ موديلات قابلة للتعديل (من الكود الأصلي) ---------- //
+        {
+            id: 14, cat: 'body', badge: 'bestseller',
+            title: 'Crème Urée 30% [موديل للتعديل]',
+            titleAr: 'كريم اليوريا 30%',
+            category: 'Soins Corps',
+            price: '',
+            desc: 'هذا موديل منتج. علاج مكثف للتقرن الجريبي، والأكواع والكعوب المتشققة، يعيد للجلد مرونته ونعومته.',
+            tags: ['Urea 30%', 'Lactic Acid', 'Emollient'],
+            benefits: ['علاج التقرن الجريبي', 'تليين الأكواع والكعوب', 'تقشير كيميائي لطيف', 'نتائج في أسبوع'],
+            shape: 'tube', color: 'bg-gradient-to-b from-slate-500 to-slate-700',
+        },
+        {
+            id: 15, cat: 'body', badge: null,
+            title: 'Lotion Hydratante Corps [موديل للتعديل]',
             titleAr: 'لوشن ترطيب الجسم',
             category: 'Soins Corps',
-            desc: 'لوشن يومي خفيف للجسم يرطب البشرة الجافة ويحميها ويحسن مظهرها الكلي مع عطر طبيعي خفيف.',
+            price: '',
+            desc: 'هذا موديل منتج. لوشن يومي خفيف للجسم يرطب البشرة الجافة ويحميها ويحسن مظهرها الكلي.',
             tags: ['Shea Butter', 'Aloe Vera', 'Ceramides'],
             benefits: ['ترطيب سريع الامتصاص', 'مناسب للاستخدام اليومي', 'يمنع الجفاف والتشقق', 'رائحة طبيعية خفيفة'],
             shape: 'bottle', color: 'bg-gradient-to-b from-lime-500 to-lime-700',
         },
         {
-            id: 11, cat: 'body', badge: null,
-            title: 'Crème Éclaircissante Corps',
-            titleAr: 'كريم توحيد لون الجسم',
-            category: 'Soins Corps',
-            desc: 'كريم يوحد لون البشرة ويخفف البقع الداكنة في المناطق الحساسة باستخدام مكونات آمنة مثبتة طبياً.',
-            tags: ['Niacinamide 5%', 'Alpha-Arbutin', 'Vitamin C'],
-            benefits: ['تفتيح البقع الداكنة', 'توحيد لون البشرة', 'مضاد للأكسدة', 'بدون هيدروكينون'],
-            shape: 'tube', color: 'bg-gradient-to-b from-yellow-400 to-yellow-600',
-        },
-        {
-            id: 12, cat: 'hair', badge: null,
-            title: 'Shampooing Traitant Antipelliculaire',
+            id: 16, cat: 'hair', badge: null,
+            title: 'Shampooing Traitant Antipelliculaire [موديل للتعديل]',
             titleAr: 'شامبو علاجي ضد القشرة',
             category: 'Soins Capillaires',
-            desc: 'علاج متقدم للقضاء على قشرة الرأس المستعصية بفضل Ketoconazole الذي يستهدف الفطريات المسببة للمشكلة.',
-            tags: ['Ketoconazole 2%', 'Zinc Pyrithione', 'Tea Tree'],
+            price: '',
+            desc: 'هذا موديل منتج. علاج متقدم للقضاء على قشرة الرأس المستعصية بفضل مضادات الفطريات.',
+            tags: ['Ketoconazole', 'Zinc Pyrithione', 'Tea Tree'],
             benefits: ['القضاء على قشرة الفطرية', 'تهدئة فروة الرأس المتهيجة', 'منع عودة القشرة', 'نتائج من أول استخدام'],
             shape: 'bottle', color: 'bg-gradient-to-b from-slate-600 to-slate-800',
         },
         {
-            id: 13, cat: 'hair', badge: 'new',
-            title: 'Lotion Anti-Chute Intensive',
+            id: 17, cat: 'hair', badge: 'new',
+            title: 'Lotion Anti-Chute Intensive [موديل للتعديل]',
             titleAr: 'لوشن مكثف ضد تساقط الشعر',
             category: 'Soins Capillaires',
-            desc: 'مصل طبي يقوي بصيلات الشعر الضعيفة ويحد من التساقط الموسمي والمزمن ويحفز نمو شعر جديد صحي وكثيف.',
-            tags: ['Minoxidil 2%', 'Biotin', 'Caffeine'],
-            benefits: ['تقليل التساقط بنسبة 60%', 'تحفيز نمو الشعر الجديد', 'تقوية الشعر من الجذر', 'نتائج في 8-12 أسبوع'],
+            price: '',
+            desc: 'هذا موديل منتج. مصل طبي يقوي بصيلات الشعر الضعيفة ويحد من التساقط ويحفز نمو شعر جديد.',
+            tags: ['Minoxidil', 'Biotin', 'Caffeine'],
+            benefits: ['تقليل التساقط', 'تحفيز نمو الشعر الجديد', 'تقوية الشعر من الجذر', 'نتائج في أسابيع'],
             shape: 'serum', color: 'bg-gradient-to-b from-emerald-500 to-emerald-700',
         },
         {
-            id: 14, cat: 'hair', badge: null,
-            title: 'Masque Nourrissant Capillaire',
+            id: 18, cat: 'hair', badge: null,
+            title: 'Masque Nourrissant Capillaire [موديل للتعديل]',
             titleAr: 'ماسك مغذي للشعر',
             category: 'Soins Capillaires',
-            desc: 'ماسك أسبوعي مكثف يعيد للشعر الجاف والتالف حيويته ونعومته بفضل مزيج من الزيوت والبروتينات النباتية.',
+            price: '',
+            desc: 'هذا موديل منتج. ماسك أسبوعي مكثف يعيد للشعر الجاف والتالف حيويته ونعومته.',
             tags: ['Keratin', 'Argan Oil', 'Collagen Peptides'],
-            benefits: ['إصلاح الشعر التالف بالحرارة', 'تعزيز اللمعة والنعومة', 'تقليل التقصف', 'ترطيب عميق يدوم أياماً'],
+            benefits: ['إصلاح الشعر التالف', 'تعزيز اللمعة والنعومة', 'تقليل التقصف', 'ترطيب عميق يدوم أياماً'],
             shape: 'tube', color: 'bg-gradient-to-b from-purple-400 to-purple-600',
-        },
-        {
-            id: 15, cat: 'antiage', badge: null,
-            title: 'Sérum Vitamine C Stabilisée',
-            titleAr: 'سيروم فيتامين C المستقر',
-            category: 'Anti-Âge',
-            desc: 'سيروم نهاري بفيتامين C مستقر بتركيز 15% يبهر البشرة ويحارب بقع الشيخوخة ويعزز إنتاج الكولاجين.',
-            tags: ['Vitamin C 15%', 'Ferulic Acid', 'Vitamin E'],
-            benefits: ['إشراق البشرة في أسبوعين', 'تقليل البقع الداكنة', 'تحفيز إنتاج الكولاجين', 'حماية من الأشعة الحرة'],
-            shape: 'serum', color: 'bg-gradient-to-b from-yellow-500 to-orange-500',
-        },
-        {
-            id: 16, cat: 'antiage', badge: null,
-            title: 'Crème Peptides Nuit',
-            titleAr: 'كريم الببتيدات الليلي',
-            category: 'Anti-Âge',
-            desc: 'كريم ليلي بالببتيدات الحيوية لتعزيز تجديد الكولاجين وتقليل الخطوط الدقيقة وتحسين إحكام البشرة أثناء النوم.',
-            tags: ['Peptides Complex', 'Retinol 0.3%', 'Hyaluronic Acid'],
-            benefits: ['تقليل الخطوط الدقيقة', 'تحسين إحكام البشرة', 'تعزيز بناء الكولاجين', 'ترطيب مكثف طوال الليل'],
-            shape: 'tube', color: 'bg-gradient-to-b from-violet-500 to-violet-700',
-        },
-        {
-            id: 17, cat: 'antiage', badge: 'new',
-            title: 'SPF 50+ Fluide Protecteur',
-            titleAr: 'فلويد حماية شمسية SPF 50+',
-            category: 'Anti-Âge',
-            desc: 'واقي شمسي طبي خفيف الملمس يحمي من الأشعة UVA/UVB ويمنع ظهور التجاعيد والبقع الناجمة عن الشمس.',
-            tags: ['SPF 50+', 'UVA/UVB Filters', 'Niacinamide 3%'],
-            benefits: ['حماية قصوى من الأشعة', 'ملمس خفيف غير دهني', 'مناسب تحت المكياج', 'يمنع الشيخوخة الضوئية'],
-            shape: 'bottle', color: 'bg-gradient-to-b from-amber-300 to-amber-500',
-        },
-        {
-            id: 18, cat: 'acne', badge: null,
-            title: 'Toner Équilibrant AHA/BHA',
-            titleAr: 'تونر موازن AHA/BHA',
-            category: 'Peau Acnéique',
-            desc: 'تونر علاجي يجمع AHA و BHA لتقشير لطيف يومي يحارب حب الشباب ويوحد البشرة ويمنح بشرة أكثر صفاءً.',
-            tags: ['AHA 5%', 'BHA 1%', 'Aloe Vera'],
-            benefits: ['تقشير يومي لطيف', 'توحيد لون البشرة', 'تقليل البثور السطحية', 'تهيئة البشرة لاستيعاب السيروم'],
-            shape: 'bottle', color: 'bg-gradient-to-b from-blue-400 to-blue-600',
         },
     ];
 
@@ -908,7 +914,8 @@
                 </div>
                 <div class="p-5 flex-1 flex flex-col text-start">
                     <span class="font-en text-[0.55rem] font-bold tracking-[0.2em] text-medical-600 uppercase mb-1.5 block">${p.category}</span>
-                    <h3 class="font-en text-base font-bold text-slate-900 mb-2 leading-snug">${p.title}</h3>
+                    <h3 class="font-sans text-base font-bold text-slate-900 mb-1 leading-snug">${p.title}</h3>
+                    <div class="text-medical-600 font-extrabold text-sm mb-2">${p.price || ''}</div>
                     <p class="text-xs text-slate-500 mb-4 flex-1 leading-relaxed line-clamp-2">${p.desc}</p>
                     <div class="flex flex-wrap gap-1.5 mb-4">
                         ${p.tags.slice(0,2).map(t => `<span class="px-2 py-1 rounded-md bg-slate-50 border border-slate-100 text-slate-500 text-[0.6rem] font-en font-semibold tracking-wide">${t}</span>`).join('')}
@@ -935,6 +942,7 @@
 
         document.getElementById('modal-category').textContent = p.category;
         document.getElementById('modal-title').textContent = p.title;
+        document.getElementById('modal-price').textContent = p.price || '';
         document.getElementById('modal-desc').textContent = p.desc;
 
         // Tags
