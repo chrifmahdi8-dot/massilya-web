@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الحلول الطبية | Massilya Dermo-Cosmétique</title>
+    <meta name="description" content="تشكيلة Massilya الكاملة من الحلول الجلدية المبنية على أسس طبية - اختر المنتج المناسب لنوع بشرتك">
+    <meta name="theme-color" content="#0284c7">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        en: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        medical: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd',
+                            500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 900: '#082f49',
+                        },
+                        clinical: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { background-color: #f8fafc; color: #0f172a; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* GLASS HEADER */
+        .glass-header {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226,232,240,0.7);
+            transition: all 0.3s ease;
+        }
+        .glass-header.scrolled { box-shadow: 0 4px 24px -4px rgba(15,23,42,0.08); }
+
+        /* BUTTONS */
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -6px rgba(2,132,199,0.35); }
+        .btn-primary:active { transform: translateY(0); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        /* FILTER TABS */
+        .filter-tab {
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            border: 1.5px solid transparent;
+        }
+        .filter-tab:hover { border-color: #bae6fd; color: #0284c7; background: #f0f9ff; }
+        .filter-tab.active {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 14px -3px rgba(2,132,199,0.4);
+        }
+
+        /* PRODUCT CARD */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid #f1f5f9;
+        }
+        .product-card:hover {
+            border-color: #bae6fd;
+            box-shadow: 0 24px 48px -16px rgba(2,132,199,0.12);
+            transform: translateY(-6px);
+        }
+        .product-card.hidden-card { display: none; }
+
+        /* ABSTRACT SHAPES */
+        .abstract-bottle {
+            width: 68px; height: 120px;
+            border-radius: 18px 18px 10px 10px;
+            position: relative;
+            box-shadow: -8px 10px 24px rgba(0,0,0,0.10), inset -4px 0 12px rgba(255,255,255,0.35);
+        }
+        .abstract-bottle::before {
+            content: ''; position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            width: 24px; height: 15px;
+            background: #cbd5e1; border-radius: 3px 3px 0 0;
+        }
+        .abstract-bottle::after {
+            content: ''; position: absolute;
+            top: 25%; left: 12%; right: 12%; height: 2px;
+            background: rgba(255,255,255,0.3); border-radius: 2px;
+        }
+        .abstract-tube {
+            width: 52px; height: 130px;
+            border-radius: 8px 8px 24px 24px;
+            position: relative;
+            box-shadow: -8px 10px 24px rgba(0,0,0,0.10), inset -4px 0 12px rgba(255,255,255,0.35);
+        }
+        .abstract-tube::before {
+            content: ''; position: absolute;
+            bottom: -12px; left: 50%; transform: translateX(-50%);
+            width: 34px; height: 12px;
+            background: #94a3b8; border-radius: 0 0 4px 4px;
+        }
+        .abstract-serum {
+            width: 44px; height: 100px;
+            border-radius: 50% 50% 8px 8px / 30px 30px 8px 8px;
+            position: relative;
+            box-shadow: -6px 8px 20px rgba(0,0,0,0.10), inset -3px 0 10px rgba(255,255,255,0.35);
+        }
+        .abstract-serum::before {
+            content: ''; position: absolute;
+            top: -22px; left: 50%; transform: translateX(-50%);
+            width: 10px; height: 22px;
+            background: #94a3b8; border-radius: 4px 4px 0 0;
+        }
+
+        /* SKELETON */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        /* MOBILE MENU */
+        #mobile-menu {
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        #mobile-menu.hidden-menu {
+            opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px);
+        }
+
+        /* MODAL */
+        #modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        #modal-overlay.hidden { opacity: 0; pointer-events: none; }
+        #modal-box {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #modal-overlay.hidden #modal-box { transform: scale(0.94) translateY(16px); }
+
+        /* BADGE */
+        .badge-new { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+        .badge-best { background: #0f172a; color: white; }
+        .badge-hot { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+
+        /* SEARCH */
+        #search-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2,132,199,0.1);
+            background: white;
+        }
+
+        /* SORT */
+        #sort-select { appearance: none; cursor: pointer; }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0; transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* TOAST */
+        #toast { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        #toast.show { opacity: 1 !important; transform: translateY(0) !important; }
+
+        /* COUNT BADGE */
+        .count-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 20px; height: 20px; border-radius: 10px;
+            background: rgba(255,255,255,0.25); font-size: 0.65rem;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+            padding: 0 5px;
+        }
+        .filter-tab:not(.active) .count-badge {
+            background: #e2e8f0; color: #64748b;
+        }
+
+        /* EMPTY STATE */
+        #empty-state { display: none; }
+        #empty-state.visible { display: flex; }
+
+        /* SCROLL INDICATOR */
+        .filter-scroll-hint::after {
+            content: '';
+            position: absolute; top: 0; end: 0; bottom: 0;
+            width: 40px;
+            background: linear-gradient(to left, #f8fafc, transparent);
+            pointer-events: none;
+        }
+
+        /* HERO */
+        .hero-bg {
+            background: linear-gradient(135deg, #082f49 0%, #0369a1 50%, #0284c7 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-6 start-6 z-[100] flex items-center gap-3 px-5 py-3.5 bg-slate-900 text-white rounded-2xl shadow-2xl opacity-0 translate-y-4 pointer-events-none text-sm font-semibold max-w-xs">
+    <span id="toast-icon" class="text-lg">✅</span>
+    <span id="toast-text">تم بنجاح</span>
+</div>
+
+<!-- HEADER -->
+<header class="glass-header fixed top-0 w-full z-50" id="header">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between transition-all duration-300" id="header-inner">
+        
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-medical-700 to-medical-900 flex items-center justify-center font-en font-bold text-xl text-white shadow-lg shadow-medical-900/20">M</div>
+            <div class="leading-none text-start">
+                <div class="font-en font-bold text-xl tracking-tight text-slate-900">Massilya</div>
+                <div class="font-en text-[0.6rem] font-semibold tracking-[0.15em] text-medical-600 uppercase mt-0.5">Dermo-Cosmétique</div>
+            </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="index.html" class="text-sm font-semibold text-slate-500 hover:text-medical-600 transition-colors">الرئيسية</a>
+            <a href="index.html#why-us" class="text-sm font-semibold text-slate-500 hover:text-medical-600 transition-colors">عن المختبر</a>
+            <a href="products.html" class="text-sm font-bold text-medical-600">الحلول الطبية</a>
+            <a href="index.html#chat-section" class="text-sm font-semibold text-slate-500 hover:text-medical-600 transition-colors">الاستشارة</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+            <a href="index.html#chat-section" class="hidden md:flex btn-primary px-5 py-2.5 rounded-full text-sm font-bold items-center gap-2">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                التشخيص الذكي
+            </a>
+            <button id="menu-btn" class="md:hidden p-2 text-slate-600 rounded-lg hover:bg-slate-100 transition-colors" aria-label="فتح القائمة">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden-menu absolute top-full start-0 w-full bg-white border-b border-slate-100 shadow-xl md:hidden">
+        <nav class="flex flex-col p-6 gap-3 text-center">
+            <a href="index.html" class="text-base font-semibold text-slate-600 py-2.5 rounded-xl hover:bg-slate-50 transition-colors">الرئيسية</a>
+            <a href="index.html#why-us" class="text-base font-semibold text-slate-600 py-2.5 rounded-xl hover:bg-slate-50 transition-colors">عن المختبر</a>
+            <a href="index.html#chat-section" class="btn-primary w-full py-3.5 rounded-xl text-sm font-bold mt-2 flex items-center justify-center gap-2">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                التشخيص الذكي
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="hero-bg pt-32 pb-16 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-8 end-16 w-64 h-64 rounded-full border-2 border-white/40"></div>
+        <div class="absolute top-16 end-32 w-32 h-32 rounded-full border border-white/30"></div>
+        <div class="absolute -bottom-8 -start-8 w-72 h-72 rounded-full border-2 border-white/20"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            <div class="animate-fade-up">
+                <div class="flex items-center gap-2 mb-4">
+                    <a href="index.html" class="text-white/60 hover:text-white text-sm font-semibold transition-colors flex items-center gap-1.5">
+                        <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        الرئيسية
+                    </a>
+                    <span class="text-white/30">/</span>
+                    <span class="text-white/80 text-sm font-semibold">الحلول الطبية</span>
+                </div>
+                <span class="font-en text-xs font-bold tracking-[0.2em] text-medical-200 uppercase mb-3 block">Les Formules Massilya</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3">تشكيلتنا الطبية الكاملة</h1>
+                <p class="text-white/70 text-base max-w-lg leading-relaxed">
+                    تركيبات علمية مدروسة لكل مشكلة جلدية — من حب الشباب إلى الشعر، بتركيزات فعالة مثبتة سريرياً.
+                </p>
+            </div>
+
+            <div class="animate-fade-up delay-200 flex items-center gap-6 bg-white/10 backdrop-blur-sm px-6 py-4 rounded-2xl border border-white/20 flex-shrink-0">
+                <div class="text-center">
+                    <div class="font-en text-3xl font-bold text-white">18<span class="text-medical-200">+</span></div>
+                    <div class="text-white/60 text-xs font-semibold mt-0.5">منتج طبي</div>
+                </div>
+                <div class="w-px h-12 bg-white/20"></div>
+                <div class="text-center">
+                    <div class="font-en text-3xl font-bold text-white">7</div>
+                    <div class="text-white/60 text-xs font-semibold mt-0.5">فئات علاجية</div>
+                </div>
+                <div class="w-px h-12 bg-white/20"></div>
+                <div class="text-center">
+                    <div class="font-en text-3xl font-bold text-white">100<span class="text-medical-200">%</span></div>
+                    <div class="text-white/60 text-xs font-semibold mt-0.5">آمن جلدياً</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="max-w-7xl mx-auto px-6 py-12">
+
+    <!-- TOOLBAR -->
+    <div class="flex flex-col md:flex-row gap-4 mb-8 reveal">
+        <!-- Search -->
+        <div class="relative flex-1 max-w-sm">
+            <svg class="absolute top-1/2 -translate-y-1/2 end-4 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="search-input" placeholder="ابحث عن منتج أو مكوّن..." 
+                class="w-full bg-white border border-slate-200 rounded-xl ps-4 pe-10 py-3 text-sm outline-none transition-all text-slate-800 placeholder-slate-400 shadow-sm"
+                oninput="filterProducts()">
+        </div>
+
+        <!-- Sort -->
+        <div class="relative">
+            <select id="sort-select" onchange="filterProducts()"
+                class="bg-white border border-slate-200 rounded-xl ps-4 pe-10 py-3 text-sm outline-none text-slate-700 shadow-sm font-semibold appearance-none cursor-pointer hover:border-medical-300 transition-colors min-w-[160px]">
+                <option value="default">الترتيب: الافتراضي</option>
+                <option value="name">الاسم أ-ي</option>
+                <option value="badge">المميزة أولاً</option>
+            </select>
+            <svg class="absolute top-1/2 -translate-y-1/2 start-3 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+        </div>
+
+        <!-- Result Count -->
+        <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-500 font-semibold shadow-sm flex-shrink-0">
+            <svg class="w-4 h-4 text-medical-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+            <span>عرض <span id="result-count" class="text-slate-900 font-bold font-en">18</span> منتج</span>
+        </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="relative mb-10 reveal" style="transition-delay:.1s">
+        <div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar" id="filter-tabs">
+            <!-- tabs injected by JS -->
+        </div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="products-grid">
+        <!-- skeleton -->
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div id="empty-state" class="flex-col items-center justify-center py-24 text-center gap-5">
+        <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center text-3xl mx-auto">🔍</div>
+        <div>
+            <h3 class="font-bold text-slate-800 text-lg mb-2">لا توجد نتائج</h3>
+            <p class="text-slate-400 text-sm">جرب كلمة بحث مختلفة أو اختر فئة أخرى</p>
+        </div>
+        <button onclick="resetFilters()" class="btn-primary px-6 py-2.5 rounded-full text-sm font-bold">إعادة تعيين الفلاتر</button>
+    </div>
+
+    <!-- AI CTA BANNER -->
+    <div class="mt-16 reveal" style="transition-delay:.2s">
+        <div class="rounded-[2rem] overflow-hidden bg-gradient-to-br from-medical-900 via-medical-700 to-medical-500 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-4 end-12 w-48 h-48 rounded-full border-2 border-white/40"></div>
+                <div class="absolute -bottom-8 -start-8 w-56 h-56 rounded-full border border-white/30"></div>
+            </div>
+            <div class="relative z-10 text-center md:text-start">
+                <span class="font-en text-xs font-bold tracking-[0.2em] text-medical-200 uppercase mb-3 block">AI Diagnostic</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">لست متأكداً من أي منتج يناسبك؟</h2>
+                <p class="text-white/70 text-sm max-w-md leading-relaxed">مستشارنا الذكي يحلل حالة بشرتك ويختار لك الروتين المثالي من بين منتجاتنا — مجاناً وفي ثوانٍ.</p>
+            </div>
+            <div class="relative z-10 flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                <a href="index.html#chat-section" class="bg-white text-medical-700 px-7 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-medical-50 transition-colors shadow-xl shadow-black/10">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-medical-600"></span>
+                    </span>
+                    ابدأ التشخيص الذكي
+                </a>
+                <a href="index.html" class="border-2 border-white/30 text-white px-7 py-3.5 rounded-full font-bold text-sm hover:bg-white/10 transition-colors">
+                    الصفحة الرئيسية
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- PRODUCT MODAL -->
+<div id="modal-overlay" class="hidden fixed inset-0 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-slate-900/50 backdrop-blur-sm" onclick="closeModal(event)">
+    <div id="modal-box" class="bg-white w-full sm:max-w-2xl rounded-t-[2rem] sm:rounded-[2rem] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+        <!-- Modal Header -->
+        <div id="modal-header" class="h-52 flex items-center justify-center relative flex-shrink-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-100 to-white"></div>
+            <div id="modal-shape" class="relative z-10"></div>
+            <button onclick="closeModal()" class="absolute top-4 end-4 z-20 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-white transition-all shadow-sm border border-slate-200/60">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="modal-badge-wrap" class="absolute top-4 start-4 z-20"></div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 md:p-8 overflow-y-auto hide-scrollbar">
+            <div class="flex items-start justify-between gap-4 mb-5">
+                <div class="text-start">
+                    <span id="modal-category" class="font-en text-[0.6rem] font-bold tracking-[0.2em] text-medical-600 uppercase mb-1.5 block"></span>
+                    <h2 id="modal-title" class="font-en text-2xl font-bold text-slate-900"></h2>
+                </div>
+            </div>
+
+            <p id="modal-desc" class="text-slate-500 text-sm leading-relaxed mb-6 text-start"></p>
+
+            <div class="mb-6 text-start">
+                <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">المكونات النشطة</h4>
+                <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div id="modal-benefits" class="mb-8 text-start">
+                <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">الفوائد الرئيسية</h4>
+                <ul id="modal-benefits-list" class="space-y-2.5"></ul>
+            </div>
+
+            <div class="flex gap-3">
+                <a href="index.html#chat-section" class="btn-primary flex-1 py-3.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    استشر لهذا المنتج
+                </a>
+                <button onclick="closeModal()" class="px-5 py-3.5 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm hover:border-medical-200 hover:text-medical-600 transition-colors">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-slate-900 pt-16 pb-8 text-slate-300 mt-16">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-slate-800 pb-12">
+            <div class="text-start">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-medical-500 to-medical-700 flex items-center justify-center font-en font-bold text-xl text-white">M</div>
+                    <div class="font-en font-bold text-xl tracking-tight text-white">Massilya</div>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed mb-5">مختبر متخصص في تطوير أرقى حلول العناية الجلدية بناءً على أسس علمية وفعالية سريرية مثبتة.</p>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-slate-700 bg-slate-800">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="font-en text-[0.65rem] tracking-wider uppercase text-slate-300">System Online</span>
+                </div>
+            </div>
+            <div class="text-start">
+                <h4 class="font-bold text-white mb-5">الروابط السريعة</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="products.html" class="hover:text-medical-400 transition-colors">منتجاتنا العلاجية</a></li>
+                    <li><a href="index.html#chat-section" class="hover:text-medical-400 transition-colors">التشخيص الذكي (AI)</a></li>
+                    <li><a href="index.html#why-us" class="hover:text-medical-400 transition-colors">فلسفة المختبر</a></li>
+                    <li><a href="#" class="hover:text-medical-400 transition-colors">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="text-start">
+                <h4 class="font-bold text-white mb-5">الفئات</h4>
+                <ul class="space-y-3 text-sm" id="footer-categories"></ul>
+            </div>
+            <div class="text-start">
+                <h4 class="font-bold text-white mb-5">مختبراتنا</h4>
+                <address class="not-italic text-sm text-slate-400 leading-loose font-en">
+                    R&D Division<br>Msila, Algeria<br>contact@massilya-lab.com
+                </address>
+            </div>
+        </div>
+        <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="font-en text-xs text-slate-500 tracking-wider">&copy; 2026 Laboratoires Massilya. All rights reserved.</div>
+            <div class="text-xs text-slate-500 font-en tracking-wider">Made with <span class="text-red-500">♥</span> in Algeria</div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* ═══════════════════════════════════
+       DATA
+    ═══════════════════════════════════ */
+    const CATEGORIES = [
+        { id: 'all',    label: 'الكل',            labelFr: 'Tout' },
+        { id: 'acne',   label: 'بشرة بحبوب',       labelFr: 'Peau Acnéique' },
+        { id: 'oily',   label: 'بشرة دهنية',       labelFr: 'Peau Grasse' },
+        { id: 'dry',    label: 'بشرة جافة',        labelFr: 'Peau Sèche' },
+        { id: 'sensitive', label: 'بشرة حساسة',   labelFr: 'Peau Sensible' },
+        { id: 'body',   label: 'العناية بالجسم',   labelFr: 'Soins Corps' },
+        { id: 'hair',   label: 'العناية بالشعر',   labelFr: 'Soins Capillaires' },
+        { id: 'antiage',label: 'مضاد للشيخوخة',    labelFr: 'Anti-Âge' },
+    ];
+
+    const PRODUCTS = [
+        {
+            id: 1, cat: 'acne', badge: 'bestseller',
+            title: 'Gel Exfoliant 2% BHA',
+            titleAr: 'جيل مقشر 2% BHA',
+            category: 'Peau Acnéique',
+            desc: 'مقشر طبي بحمض الساليسيليك لاستهداف حب الشباب المختبئ تحت الجلد، الرؤوس السوداء، وتقليص المسام المتضخمة بشكل مرئي.',
+            tags: ['Salicylic Acid 2%', 'BHA', 'Niacinamide'],
+            benefits: ['تفتيح المسام وإزالة الخلايا الميتة', 'تقليص ظهور الرؤوس السوداء', 'تنظيم إنتاج الدهون الزائدة', 'تأثير مضاد للالتهاب'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-blue-500 to-blue-700',
+        },
+        {
+            id: 2, cat: 'acne', badge: null,
+            title: 'Crème Purifiante Nuit',
+            titleAr: 'كريم تنقية ليلي',
+            category: 'Peau Acnéique',
+            desc: 'كريم ليلي يجمع بين Retinol بتركيز متدرج وZinc لمكافحة البثور والندبات أثناء النوم وتجديد بنية الجلد.',
+            tags: ['Retinol 0.1%', 'Zinc PCA', 'Panthenol'],
+            benefits: ['تجديد الخلايا أثناء النوم', 'تقليل ظهور الندبات الحمراء', 'ترطيب دون انسداد المسام', 'تقليل التهيج'],
+            shape: 'tube', color: 'bg-gradient-to-b from-indigo-500 to-indigo-700',
+        },
+        {
+            id: 3, cat: 'oily', badge: null,
+            title: 'Nettoyant Purifiant',
+            titleAr: 'منظف منقي للبشرة الدهنية',
+            category: 'Peau Grasse',
+            desc: 'جل منظف يستهدف البشرة الدهنية — ينقي عمقاً وينظم الدهون دون تجريد الجلد من رطوبته الطبيعية.',
+            tags: ['Zinc PCA', 'Niacinamide 5%', 'Green Tea'],
+            benefits: ['تنظيم إفراز الزهم', 'تنظيف عميق بدون جفاف', 'مضاد للأكسدة', 'مناسب للاستخدام اليومي'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-teal-500 to-teal-700',
+        },
+        {
+            id: 4, cat: 'oily', badge: 'new',
+            title: 'Sérum Matifiant',
+            titleAr: 'سيروم مطفئ للمظهر الدهني',
+            category: 'Peau Grasse',
+            desc: 'سيروم خفيف الوزن يعمل طوال اليوم لمحاربة اللمعة الزائدة وتضييق مظهر المسام للحصول على بشرة ناعمة المظهر.',
+            tags: ['Niacinamide 10%', 'Hyaluronic Acid', 'Silica'],
+            benefits: ['تقليل اللمعة 6-8 ساعات', 'تضييق مظهر المسام', 'ترطيب خفيف غير دهني', 'تحسين نسيج البشرة'],
+            shape: 'serum', color: 'bg-gradient-to-b from-cyan-500 to-cyan-700',
+        },
+        {
+            id: 5, cat: 'sensitive', badge: 'doux',
+            title: 'Gel Ultra Doux',
+            titleAr: 'جيل منظف فائق اللطف',
+            category: 'Peau Sensible',
+            desc: 'تركيبة خالية من الصابون والعطور مصممة لتنظيف البشرة الجافة والحساسة بلطف فائق مع الحفاظ على حاجز البشرة.',
+            tags: ['Aloe Vera', 'Panthenol', 'Oat Extract'],
+            benefits: ['لا يحتوي على صابون أو عطور', 'يحافظ على حاجز الجلد', 'مناسب لأكثر البشرة حساسية', 'pH متوازن'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-sky-400 to-sky-600',
+        },
+        {
+            id: 6, cat: 'sensitive', badge: null,
+            title: 'Crème Barrière Réparatrice',
+            titleAr: 'كريم إصلاح حاجز البشرة',
+            category: 'Peau Sensible',
+            desc: 'كريم محتوى على Ceramides و Fatty Acids لإصلاح حاجز البشرة التالف وتقليل الاحمرار والتهيج المزمن.',
+            tags: ['Ceramides', 'Fatty Acids', 'Madecassoside'],
+            benefits: ['إعادة بناء حاجز الجلد', 'تهدئة الاحمرار والحكة', 'حماية من العوامل الخارجية', 'نتائج مرئية في 48 ساعة'],
+            shape: 'tube', color: 'bg-gradient-to-b from-rose-300 to-rose-500',
+        },
+        {
+            id: 7, cat: 'dry', badge: null,
+            title: 'Crème Riche Hydratante',
+            titleAr: 'كريم ترطيب مكثف',
+            category: 'Peau Sèche',
+            desc: 'كريم فائق الثراء للترطيب العميق والمطوّل — يحتبس الرطوبة ويمنع الجفاف حتى في أشد الأجواء برودة.',
+            tags: ['Hyaluronic Acid', 'Shea Butter', 'Glycerin'],
+            benefits: ['ترطيب يدوم 24 ساعة', 'تقليل التقشر والخشونة', 'إحساس فوري بالنعومة', 'مناسب للشتاء والأجواء الجافة'],
+            shape: 'tube', color: 'bg-gradient-to-b from-amber-400 to-amber-600',
+        },
+        {
+            id: 8, cat: 'dry', badge: null,
+            title: 'Huile Sèche Visage',
+            titleAr: 'زيت بشرة جاف (للوجه)',
+            category: 'Peau Sèche',
+            desc: 'زيت بشرة جاف متعدد الاستخدامات، يمتص بسرعة ويغذي البشرة الجافة بعمق دون إحداث لمعة أو انسداد مسام.',
+            tags: ['Squalane', 'Rosehip Oil', 'Vitamin E'],
+            benefits: ['امتصاص سريع دون دهنية', 'تغذية عميقة للبشرة', 'مضاد للأكسدة القوي', 'يقلل ظهور خطوط التعبير'],
+            shape: 'serum', color: 'bg-gradient-to-b from-orange-400 to-orange-600',
+        },
+        {
+            id: 9, cat: 'body', badge: 'bestseller',
+            title: 'Crème Urée 30%',
+            titleAr: 'كريم اليوريا 30%',
+            category: 'Soins Corps',
+            desc: 'علاج مكثف للتقرن الجريبي (Keratosis Pilaris)، والأكواع والكعوب المتشققة، يعيد للجلد مرونته ونعومته بشكل استثنائي.',
+            tags: ['Urea 30%', 'Lactic Acid', 'Emollient'],
+            benefits: ['علاج التقرن الجريبي المستعصي', 'تليين الأكواع والكعوب', 'تقشير كيميائي لطيف', 'نتائج في أسبوع واحد'],
+            shape: 'tube', color: 'bg-gradient-to-b from-slate-500 to-slate-700',
+        },
+        {
+            id: 10, cat: 'body', badge: null,
+            title: 'Lotion Hydratante Corps',
+            titleAr: 'لوشن ترطيب الجسم',
+            category: 'Soins Corps',
+            desc: 'لوشن يومي خفيف للجسم يرطب البشرة الجافة ويحميها ويحسن مظهرها الكلي مع عطر طبيعي خفيف.',
+            tags: ['Shea Butter', 'Aloe Vera', 'Ceramides'],
+            benefits: ['ترطيب سريع الامتصاص', 'مناسب للاستخدام اليومي', 'يمنع الجفاف والتشقق', 'رائحة طبيعية خفيفة'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-lime-500 to-lime-700',
+        },
+        {
+            id: 11, cat: 'body', badge: null,
+            title: 'Crème Éclaircissante Corps',
+            titleAr: 'كريم توحيد لون الجسم',
+            category: 'Soins Corps',
+            desc: 'كريم يوحد لون البشرة ويخفف البقع الداكنة في المناطق الحساسة باستخدام مكونات آمنة مثبتة طبياً.',
+            tags: ['Niacinamide 5%', 'Alpha-Arbutin', 'Vitamin C'],
+            benefits: ['تفتيح البقع الداكنة', 'توحيد لون البشرة', 'مضاد للأكسدة', 'بدون هيدروكينون'],
+            shape: 'tube', color: 'bg-gradient-to-b from-yellow-400 to-yellow-600',
+        },
+        {
+            id: 12, cat: 'hair', badge: null,
+            title: 'Shampooing Traitant Antipelliculaire',
+            titleAr: 'شامبو علاجي ضد القشرة',
+            category: 'Soins Capillaires',
+            desc: 'علاج متقدم للقضاء على قشرة الرأس المستعصية بفضل Ketoconazole الذي يستهدف الفطريات المسببة للمشكلة.',
+            tags: ['Ketoconazole 2%', 'Zinc Pyrithione', 'Tea Tree'],
+            benefits: ['القضاء على قشرة الفطرية', 'تهدئة فروة الرأس المتهيجة', 'منع عودة القشرة', 'نتائج من أول استخدام'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-slate-600 to-slate-800',
+        },
+        {
+            id: 13, cat: 'hair', badge: 'new',
+            title: 'Lotion Anti-Chute Intensive',
+            titleAr: 'لوشن مكثف ضد تساقط الشعر',
+            category: 'Soins Capillaires',
+            desc: 'مصل طبي يقوي بصيلات الشعر الضعيفة ويحد من التساقط الموسمي والمزمن ويحفز نمو شعر جديد صحي وكثيف.',
+            tags: ['Minoxidil 2%', 'Biotin', 'Caffeine'],
+            benefits: ['تقليل التساقط بنسبة 60%', 'تحفيز نمو الشعر الجديد', 'تقوية الشعر من الجذر', 'نتائج في 8-12 أسبوع'],
+            shape: 'serum', color: 'bg-gradient-to-b from-emerald-500 to-emerald-700',
+        },
+        {
+            id: 14, cat: 'hair', badge: null,
+            title: 'Masque Nourrissant Capillaire',
+            titleAr: 'ماسك مغذي للشعر',
+            category: 'Soins Capillaires',
+            desc: 'ماسك أسبوعي مكثف يعيد للشعر الجاف والتالف حيويته ونعومته بفضل مزيج من الزيوت والبروتينات النباتية.',
+            tags: ['Keratin', 'Argan Oil', 'Collagen Peptides'],
+            benefits: ['إصلاح الشعر التالف بالحرارة', 'تعزيز اللمعة والنعومة', 'تقليل التقصف', 'ترطيب عميق يدوم أياماً'],
+            shape: 'tube', color: 'bg-gradient-to-b from-purple-400 to-purple-600',
+        },
+        {
+            id: 15, cat: 'antiage', badge: null,
+            title: 'Sérum Vitamine C Stabilisée',
+            titleAr: 'سيروم فيتامين C المستقر',
+            category: 'Anti-Âge',
+            desc: 'سيروم نهاري بفيتامين C مستقر بتركيز 15% يبهر البشرة ويحارب بقع الشيخوخة ويعزز إنتاج الكولاجين.',
+            tags: ['Vitamin C 15%', 'Ferulic Acid', 'Vitamin E'],
+            benefits: ['إشراق البشرة في أسبوعين', 'تقليل البقع الداكنة', 'تحفيز إنتاج الكولاجين', 'حماية من الأشعة الحرة'],
+            shape: 'serum', color: 'bg-gradient-to-b from-yellow-500 to-orange-500',
+        },
+        {
+            id: 16, cat: 'antiage', badge: null,
+            title: 'Crème Peptides Nuit',
+            titleAr: 'كريم الببتيدات الليلي',
+            category: 'Anti-Âge',
+            desc: 'كريم ليلي بالببتيدات الحيوية لتعزيز تجديد الكولاجين وتقليل الخطوط الدقيقة وتحسين إحكام البشرة أثناء النوم.',
+            tags: ['Peptides Complex', 'Retinol 0.3%', 'Hyaluronic Acid'],
+            benefits: ['تقليل الخطوط الدقيقة', 'تحسين إحكام البشرة', 'تعزيز بناء الكولاجين', 'ترطيب مكثف طوال الليل'],
+            shape: 'tube', color: 'bg-gradient-to-b from-violet-500 to-violet-700',
+        },
+        {
+            id: 17, cat: 'antiage', badge: 'new',
+            title: 'SPF 50+ Fluide Protecteur',
+            titleAr: 'فلويد حماية شمسية SPF 50+',
+            category: 'Anti-Âge',
+            desc: 'واقي شمسي طبي خفيف الملمس يحمي من الأشعة UVA/UVB ويمنع ظهور التجاعيد والبقع الناجمة عن الشمس.',
+            tags: ['SPF 50+', 'UVA/UVB Filters', 'Niacinamide 3%'],
+            benefits: ['حماية قصوى من الأشعة', 'ملمس خفيف غير دهني', 'مناسب تحت المكياج', 'يمنع الشيخوخة الضوئية'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-amber-300 to-amber-500',
+        },
+        {
+            id: 18, cat: 'acne', badge: null,
+            title: 'Toner Équilibrant AHA/BHA',
+            titleAr: 'تونر موازن AHA/BHA',
+            category: 'Peau Acnéique',
+            desc: 'تونر علاجي يجمع AHA و BHA لتقشير لطيف يومي يحارب حب الشباب ويوحد البشرة ويمنح بشرة أكثر صفاءً.',
+            tags: ['AHA 5%', 'BHA 1%', 'Aloe Vera'],
+            benefits: ['تقشير يومي لطيف', 'توحيد لون البشرة', 'تقليل البثور السطحية', 'تهيئة البشرة لاستيعاب السيروم'],
+            shape: 'bottle', color: 'bg-gradient-to-b from-blue-400 to-blue-600',
+        },
+    ];
+
+    /* ═══════════════════════════════════
+       STATE
+    ═══════════════════════════════════ */
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let sortBy = 'default';
+
+    /* ═══════════════════════════════════
+       HEADER
+    ═══════════════════════════════════ */
+    const header = document.getElementById('header');
+    const headerInner = document.getElementById('header-inner');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            headerInner.classList.replace('py-4', 'py-2.5');
+        } else {
+            header.classList.remove('scrolled');
+            headerInner.classList.replace('py-2.5', 'py-4');
+        }
+    }, { passive: true });
+
+    /* ═══════════════════════════════════
+       MOBILE MENU
+    ═══════════════════════════════════ */
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden-menu'));
+    document.addEventListener('click', e => {
+        if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+            mobileMenu.classList.add('hidden-menu');
+        }
+    });
+
+    /* ═══════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════ */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ═══════════════════════════════════
+       TOAST
+    ═══════════════════════════════════ */
+    function showToast(msg, icon = '✅') {
+        const t = document.getElementById('toast');
+        document.getElementById('toast-text').textContent = msg;
+        document.getElementById('toast-icon').textContent = icon;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    /* ═══════════════════════════════════
+       BUILD FILTER TABS
+    ═══════════════════════════════════ */
+    function buildTabs() {
+        const container = document.getElementById('filter-tabs');
+        const counts = {};
+        PRODUCTS.forEach(p => {
+            counts[p.cat] = (counts[p.cat] || 0) + 1;
+        });
+
+        container.innerHTML = CATEGORIES.map(cat => {
+            const count = cat.id === 'all' ? PRODUCTS.length : (counts[cat.id] || 0);
+            const isActive = cat.id === activeCategory;
+            return `
+                <button onclick="setCategory('${cat.id}')"
+                    class="filter-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold flex-shrink-0 ${isActive ? 'active' : 'bg-white text-slate-600 shadow-sm'}"
+                    id="tab-${cat.id}">
+                    <span>${cat.label}</span>
+                    <span class="count-badge">${count}</span>
+                </button>
+            `;
+        }).join('');
+
+        // Footer categories
+        const footer = document.getElementById('footer-categories');
+        if (footer) {
+            footer.innerHTML = CATEGORIES.filter(c => c.id !== 'all').map(c =>
+                `<li><button onclick="setCategory('${c.id}'); window.scrollTo({top:0})" class="hover:text-medical-400 transition-colors">${c.label}</button></li>`
+            ).join('');
+        }
+    }
+
+    function setCategory(id) {
+        activeCategory = id;
+        buildTabs();
+        filterProducts();
+    }
+
+    /* ═══════════════════════════════════
+       FILTER & RENDER
+    ═══════════════════════════════════ */
+    function getFilteredProducts() {
+        let list = [...PRODUCTS];
+
+        if (activeCategory !== 'all') {
+            list = list.filter(p => p.cat === activeCategory);
+        }
+
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter(p =>
+                p.title.toLowerCase().includes(q) ||
+                p.titleAr.includes(q) ||
+                p.desc.includes(q) ||
+                p.tags.some(t => t.toLowerCase().includes(q)) ||
+                p.category.toLowerCase().includes(q)
+            );
+        }
+
+        if (sortBy === 'name') {
+            list.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sortBy === 'badge') {
+            const order = { bestseller: 0, new: 1, hot: 2, doux: 3, null: 4 };
+            list.sort((a, b) => (order[a.badge] ?? 4) - (order[b.badge] ?? 4));
+        }
+
+        return list;
+    }
+
+    function filterProducts() {
+        searchQuery = document.getElementById('search-input').value.trim();
+        sortBy = document.getElementById('sort-select').value;
+        renderProducts(getFilteredProducts());
+    }
+
+    function resetFilters() {
+        document.getElementById('search-input').value = '';
+        document.getElementById('sort-select').value = 'default';
+        searchQuery = '';
+        sortBy = 'default';
+        activeCategory = 'all';
+        buildTabs();
+        renderProducts(PRODUCTS);
+    }
+
+    /* ═══════════════════════════════════
+       SHAPES
+    ═══════════════════════════════════ */
+    function getShape(type, color, size = '') {
+        const cls = `abstract-${type} ${color} ${size}`;
+        return `<div class="${cls}"></div>`;
+    }
+
+    /* ═══════════════════════════════════
+       BADGE HTML
+    ═══════════════════════════════════ */
+    function getBadgeHtml(badge) {
+        if (!badge) return '';
+        const map = {
+            bestseller: ['badge-best', 'Bestseller'],
+            new:        ['badge-new', 'Nouveau ✨'],
+            hot:        ['badge-hot', 'Hot 🔥'],
+            doux:       ['bg-sky-50 text-sky-600 border border-sky-200', 'Doux 🌿'],
+        };
+        const [cls, text] = map[badge] || ['bg-slate-100 text-slate-600', badge];
+        return `<div class="absolute top-3 start-3 z-10 px-2.5 py-1 text-[0.6rem] font-en font-bold uppercase tracking-wider rounded-full ${cls}">${text}</div>`;
+    }
+
+    /* ═══════════════════════════════════
+       RENDER PRODUCTS
+    ═══════════════════════════════════ */
+    function showSkeletons() {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = Array(8).fill(`
+            <div class="bg-white rounded-[1.5rem] overflow-hidden border border-slate-100">
+                <div class="h-44 skeleton"></div>
+                <div class="p-5 space-y-3">
+                    <div class="skeleton h-2.5 w-1/3 rounded-full"></div>
+                    <div class="skeleton h-4 w-2/3 rounded-lg"></div>
+                    <div class="skeleton h-2.5 w-full rounded-full"></div>
+                    <div class="skeleton h-2.5 w-3/4 rounded-full"></div>
+                    <div class="flex gap-2 pt-2">
+                        <div class="skeleton h-5 w-16 rounded-md"></div>
+                        <div class="skeleton h-5 w-16 rounded-md"></div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderProducts(list) {
+        const grid = document.getElementById('products-grid');
+        const empty = document.getElementById('empty-state');
+        const countEl = document.getElementById('result-count');
+
+        countEl.textContent = list.length;
+
+        if (list.length === 0) {
+            grid.innerHTML = '';
+            empty.classList.add('visible');
+            return;
+        }
+        empty.classList.remove('visible');
+
+        grid.innerHTML = list.map((p, i) => `
+            <article class="product-card bg-white rounded-[1.5rem] overflow-hidden flex flex-col group relative cursor-pointer"
+                style="animation: fadeUp 0.5s ease forwards ${i * 0.05}s; opacity:0"
+                onclick="openModal(${p.id})">
+                ${getBadgeHtml(p.badge)}
+                <div class="h-44 bg-gradient-to-b from-slate-50 to-white flex items-center justify-center relative overflow-hidden group-hover:from-medical-50/40 transition-all duration-500">
+                    <div class="group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500 drop-shadow-lg">
+                        ${getShape(p.shape, p.color)}
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col text-start">
+                    <span class="font-en text-[0.55rem] font-bold tracking-[0.2em] text-medical-600 uppercase mb-1.5 block">${p.category}</span>
+                    <h3 class="font-en text-base font-bold text-slate-900 mb-2 leading-snug">${p.title}</h3>
+                    <p class="text-xs text-slate-500 mb-4 flex-1 leading-relaxed line-clamp-2">${p.desc}</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        ${p.tags.slice(0,2).map(t => `<span class="px-2 py-1 rounded-md bg-slate-50 border border-slate-100 text-slate-500 text-[0.6rem] font-en font-semibold tracking-wide">${t}</span>`).join('')}
+                        ${p.tags.length > 2 ? `<span class="px-2 py-1 rounded-md bg-slate-50 border border-slate-100 text-slate-400 text-[0.6rem] font-en font-semibold">+${p.tags.length-2}</span>` : ''}
+                    </div>
+                    <button class="w-full py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-medical-50 hover:text-medical-600 hover:border-medical-200 transition-all duration-300 flex items-center justify-center gap-1.5 group-hover:border-medical-200">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </article>
+        `).join('');
+
+        // Re-observe cards for reveal
+        document.querySelectorAll('.product-card').forEach(el => revealObserver.observe(el));
+    }
+
+    /* ═══════════════════════════════════
+       MODAL
+    ═══════════════════════════════════ */
+    function openModal(id) {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) return;
+
+        document.getElementById('modal-category').textContent = p.category;
+        document.getElementById('modal-title').textContent = p.title;
+        document.getElementById('modal-desc').textContent = p.desc;
+
+        // Tags
+        document.getElementById('modal-tags').innerHTML = p.tags.map(t =>
+            `<span class="px-3 py-1.5 rounded-lg bg-medical-50 border border-medical-100 text-medical-700 text-xs font-en font-bold tracking-wide">${t}</span>`
+        ).join('');
+
+        // Benefits
+        document.getElementById('modal-benefits-list').innerHTML = p.benefits.map(b =>
+            `<li class="flex items-start gap-2.5 text-sm text-slate-600">
+                <div class="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                ${b}
+            </li>`
+        ).join('');
+
+        // Shape in modal
+        document.getElementById('modal-shape').innerHTML = `<div class="abstract-${p.shape} ${p.color} scale-125 shadow-xl"></div>`;
+
+        // Badge
+        document.getElementById('modal-badge-wrap').innerHTML = getBadgeHtml(p.badge);
+
+        // Header bg color hint
+        document.getElementById('modal-header').style.background = '';
+
+        const overlay = document.getElementById('modal-overlay');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+        if (e && e.target !== document.getElementById('modal-overlay') && e.type === 'click') return;
+        const overlay = document.getElementById('modal-overlay');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    // ESC key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    /* ═══════════════════════════════════
+       INIT
+    ═══════════════════════════════════ */
+    function init() {
+        buildTabs();
+        showSkeletons();
+        setTimeout(() => renderProducts(PRODUCTS), 800);
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>
