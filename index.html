@@ -469,27 +469,6 @@
         </div>
     </div>
 </section>
-
-<!-- ════════ PRODUCTS ════════ -->
-<section id="products" class="py-24 bg-slate-50 border-y border-slate-200/50">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
-            <div class="text-start">
-                <span class="font-en text-xs font-bold tracking-[0.2em] text-medical-600 uppercase mb-3 block">Les Formules</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">حلولنا الطبية المتقدمة</h2>
-            </div>
-            <button onclick="smoothScroll('chat-section')" class="text-medical-600 font-bold text-sm flex items-center gap-2 hover:text-medical-800 transition-colors group">
-                احصل على توصية مخصصة
-                <svg class="w-4 h-4 rtl:rotate-180 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
-            <!-- Skeleton Loading (جديد ✅) -->
-        </div>
-    </div>
-</section>
-
 <!-- ════════ AI CHAT ════════ -->
 <section id="chat-section" class="py-24 bg-white relative overflow-hidden">
     <div class="absolute top-0 end-0 w-1/2 h-full bg-gradient-to-l from-medical-50/60 to-transparent rounded-s-[100px] -z-10 hidden lg:block pointer-events-none"></div>
@@ -701,16 +680,6 @@
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 3000);
     }
-
-    /* ════════ PRODUCTS ════════ */
-    const products = [
-        { badge: "Bestseller", category: "Peau Acnéique", title: "Gel Exfoliant 2% BHA", desc: "مقشر طبي لاستهداف حب الشباب، الرؤوس السوداء، وتقليص المسام بشكل فعال.", tags: ["Salicylic Acid", "Purifying"], color: "bg-gradient-to-b from-blue-500 to-blue-700" },
-        { category: "Cuir Chevelu", title: "Shampooing Traitant", desc: "علاج متقدم للقضاء على قشرة الرأس المستعصية وتهدئة فروة الرأس المتهيجة.", tags: ["Ketoconazole", "Anti-Pelliculaire"], color: "bg-gradient-to-b from-slate-600 to-slate-800" },
-        { category: "Peau Grasse", title: "Nettoyant Purifiant", desc: "جل منظف ينقي البشرة الدهنية بعمق وينظم إفراز الدهون دون تجفيف الجلد.", tags: ["Zinc PCA", "Niacinamide"], color: "bg-gradient-to-b from-teal-500 to-teal-700" },
-        { badge: "Doux", category: "Peau Sensible", title: "Gel Ultra Doux", desc: "تركيبة خالية من الصابون لتنظيف البشرة الجافة والحساسة بلطف فائق.", tags: ["Aloe Vera", "Panthenol"], color: "bg-gradient-to-b from-sky-400 to-sky-600" },
-        { category: "Soins Corps", title: "Crème Urée 30%", desc: "علاج مكثف للتقرن الجريبي والخشونة الشديدة، يعيد مرونة الجلد ونعومته.", tags: ["Urea 30%", "Emollient"], color: "bg-gradient-to-b from-indigo-400 to-indigo-600" },
-        { badge: "Nouveau", category: "Soins Capillaires", title: "Lotion Anti-Chute", desc: "مصل طبي مقوي لبصيلات الشعر يحد من التساقط ويحفز نمو الشعر الصحي.", tags: ["Minoxidil 2%", "Biotin"], color: "bg-gradient-to-b from-emerald-500 to-emerald-700" }
-    ];
 
     function showSkeletons() {
         const grid = document.getElementById('products-grid');
